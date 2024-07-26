@@ -1,13 +1,11 @@
 import streamlit as st
-import pickle
+import joblib
 import numpy as np
 
 # Fungsi untuk memuat model dan melakukan prediksi
 def value_predictor(to_predict_list):
     to_predict = np.array(to_predict_list).reshape(1, -1)  # Membentuk array 2D dengan 1 baris dan 10 kolom
-    # Memuat model
-    with open('model.pkl', 'rb') as file:
-        loaded_model = pickle.load(file)
+    loaded_model = joblib.load('model.sav')
     result = loaded_model.predict(to_predict)[0]  # Ambil hasil prediksi
     weather_mapping = {
         0: 'Cloudy',
@@ -20,17 +18,39 @@ def value_predictor(to_predict_list):
 # Antarmuka pengguna Streamlit
 st.title("Weather Prediction")
 
-# Formulir input
+# Input form
 temperature = st.number_input('Temperature', format="%f")
 humidity = st.number_input('Humidity', format="%f")
 wind_speed = st.number_input('Wind Speed', format="%f")
 precipitation = st.number_input('Precipitation (%)', format="%f")
-cloud_cover = st.number_input('Cloud Cover', format="%f")
+
+# Dropdown untuk Cloud Cover
+cloud_cover = st.selectbox('Cloud Cover', options={
+    'Clear': 0,
+    'Cloudy': 1,
+    'Overcast': 2,
+    'Partly Cloudy': 3
+})
+
+# Dropdown untuk Season
+season = st.selectbox('Season', options={
+    'Autumn': 0,
+    'Spring': 1,
+    'Summer': 2,
+    'Winter': 3
+})
+
+# Dropdown untuk Location
+location = st.selectbox('Location', options={
+    'Coastal': 0,
+    'Inland': 1,
+    'Mountain': 2
+})
+
+# Inputan lainnya
 atmospheric_pressure = st.number_input('Atmospheric Pressure', format="%f")
 uv_index = st.number_input('UV Index', format="%f")
-season = st.number_input('Season', format="%f")
 visibility = st.number_input('Visibility (km)', format="%f")
-location = st.number_input('Location', format="%f")
 
 # Tombol prediksi
 if st.button('Predict'):
@@ -44,4 +64,4 @@ if st.button('Predict'):
         result = value_predictor(to_predict_list)
         st.write(f"Predicted Weather Type: {result}")
     except Exception as e:
-        st.error(f"Terjadi kesalahan: {str(e)}")
+        st.error(f"An error occurred: {str(e)}")
