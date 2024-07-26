@@ -32,7 +32,7 @@ def value_predictor(to_predict_list):
 st.markdown("""
     <style>
     .main {
-        background-image: url('https://i.pinimg.com/736x/c2/47/b3/c247b3049ed035a022785257f87b1eb2.jpg');
+        background-image: url('https://wallpapercave.com/wp/wp12086198.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
