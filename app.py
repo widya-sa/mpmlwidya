@@ -1,4 +1,6 @@
 import streamlit as st
+import pandas as pd
+import pickle
 
 # Fungsi untuk memuat model dan melakukan prediksi
 def value_predictor(to_predict_list):
@@ -140,19 +142,19 @@ with st.container():
     
     with col1:
         st.markdown('<div class="input-label"><i class="fas fa-temperature-high"></i> Temperature (°C)</div>', unsafe_allow_html=True)
-        temperature = st.number_input('', format="%.1f", key="temperature")
+        temperature = st.number_input('', format="%.1f", step=0.5, key="temperature")
         
         st.markdown('<div class="input-label"><i class="fas fa-tachometer-alt"></i> Humidity (%)</div>', unsafe_allow_html=True)
-        humidity = st.number_input('', format="%.1f", key="humidity")
+        humidity = st.number_input('', format="%.1f", step=0.5, key="humidity")
         
         st.markdown('<div class="input-label"><i class="fas fa-wind"></i> Wind Speed (km/h)</div>', unsafe_allow_html=True)
-        wind_speed = st.number_input('', format="%.1f", key="wind_speed")
+        wind_speed = st.number_input('', format="%.1f", step=0.5, key="wind_speed")
         
         st.markdown('<div class="input-label"><i class="fas fa-cloud-showers-heavy"></i> Precipitation (%)</div>', unsafe_allow_html=True)
-        precipitation = st.number_input('', format="%.1f", key="precipitation")
+        precipitation = st.number_input('', format="%.1f", step=0.5, key="precipitation")
         
         st.markdown('<div class="input-label"><i class="fas fa-cloud"></i> Atmospheric Pressure (hPa)</div>', unsafe_allow_html=True)
-        atmospheric_pressure = st.number_input('', format="%.1f", key="atmospheric_pressure")
+        atmospheric_pressure = st.number_input('', format="%.1f", step=0.5, key="atmospheric_pressure")
     
     with col2:
         st.markdown('<div class="input-label"><i class="fas fa-cloud-sun"></i> Cloud Cover</div>', unsafe_allow_html=True)
@@ -168,10 +170,10 @@ with st.container():
         location = st.selectbox('', options=list(location_options.keys()), key="location")
         
         st.markdown('<div class="input-label"><i class="fas fa-sun"></i> UV Index</div>', unsafe_allow_html=True)
-        uv_index = st.number_input('', format="%.1f", key="uv_index")
+        uv_index = st.number_input('', format="%.1f", step=0.5, key="uv_index")
         
         st.markdown('<div class="input-label"><i class="fas fa-eye"></i> Visibility (km)</div>', unsafe_allow_html=True)
-        visibility = st.number_input('', format="%.1f", key="visibility")
+        visibility = st.number_input('', format="%.1f", step=0.5, key="visibility")
 
 st.markdown('</div>', unsafe_allow_html=True)
 
