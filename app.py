@@ -1,5 +1,30 @@
 import streamlit as st
 
+# Fungsi untuk memuat model dan melakukan prediksi
+def value_predictor(to_predict_list):
+    columns = [
+        'Temperature', 'Humidity', 'Wind Speed', 'Precipitation (%)', 'Cloud Cover',
+        'Atmospheric Pressure', 'UV Index', 'Season', 'Visibility (km)', 'Location'
+    ]
+    to_predict_df = pd.DataFrame([to_predict_list], columns=columns)
+    
+    try:
+        with open('model.pkl', 'rb') as file:
+            loaded_model = pickle.load(file)
+        
+        result = loaded_model.predict(to_predict_df)[0]
+        
+        weather_mapping = {
+            0: 'Cloudy',
+            1: 'Rainy',
+            2: 'Snowy',
+            3: 'Sunny'
+        }
+        
+        return weather_mapping.get(result, 'Unknown')
+    except Exception as e:
+        raise RuntimeError(f"Failed to predict weather: {e}")
+
 # Menambahkan CSS untuk background dan styling
 st.markdown("""
     <style>
