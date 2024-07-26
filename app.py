@@ -122,15 +122,8 @@ st.markdown("""
 st.markdown('<div class="main">', unsafe_allow_html=True)
 
 # Antarmuka pengguna Streamlit
-st.title("CloudGaze (Weather Prediction)")
-st.write("""
-    Welcome to CloudGaze!
-    Discover a new way to keep an eye on the sky with CloudGaze, your go-to app for all things weather. Whether you're dreaming of a sunny getaway or preparing for a rainy day, CloudGaze provides crystal-clear forecasts that are as reliable as they are engaging.
-
-    With CloudGaze, forecasting the weather becomes an adventure. Our intuitive interface and real-time updates ensure you’re always prepared, while our vibrant visuals make checking the weather a delightful experience. Stay ahead of the storm, enjoy sunny spells, and gaze at the clouds with confidence—CloudGaze is here to make every forecast an easy breeze.
-
-    Proudly created by Widya S.A, CloudGaze is crafted with care and expertise to bring you the best in weather prediction technology.
-""")
+st.title("Weather Prediction")
+st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
 # Membagi input form menjadi dua kolom dengan 5 input di masing-masing kolom
 st.markdown('<div class="stColumns">', unsafe_allow_html=True)
@@ -185,4 +178,9 @@ if st.button('Predict'):
     
     try:
         result = value_predictor(to_predict_list)
-        st.markdown(f'<div class="prediction-result">Predicted Weather Type: {result}</div>', unsafe_allow_html
+        st.markdown(f'<div class="prediction-result">Predicted Weather Type: {result}</div>', unsafe_allow_html=True)
+    except RuntimeError as e:
+        st.error(f"An error occurred: {str(e)}")
+
+# Menutup div dengan kelas 'main'
+st.markdown('</div>', unsafe_allow_html=True)
