@@ -5,21 +5,18 @@ import joblib
 
 # Fungsi untuk memuat model dan melakukan prediksi
 def value_predictor(to_predict_list):
-    # Membentuk DataFrame dari list input
-    to_predict_df = pd.DataFrame([to_predict_list], columns=[
+    columns = [
         'Temperature', 'Humidity', 'Wind Speed', 'Precipitation', 'Cloud Cover',
         'Atmospheric Pressure', 'UV Index', 'Season', 'Visibility', 'Location'
-    ])
+    ]
+    to_predict_df = pd.DataFrame([to_predict_list], columns=columns)
     
     try:
-        # Memuat model dari file
         with open('model.pkl', 'rb') as file:
             loaded_model = joblib.load(file)
         
-        # Melakukan prediksi
         result = loaded_model.predict(to_predict_df)[0]
         
-        # Pemetaan hasil prediksi ke kategori cuaca
         weather_mapping = {
             0: 'Cloudy',
             1: 'Rainy',
@@ -27,11 +24,39 @@ def value_predictor(to_predict_list):
             3: 'Sunny'
         }
         
-        # Mengembalikan kategori cuaca sesuai hasil prediksi
         return weather_mapping.get(result, 'Unknown')
     except Exception as e:
-        # Menangani error saat memuat model atau prediksi
         raise RuntimeError(f"Failed to predict weather: {e}")
+
+# Menambahkan CSS untuk background
+st.markdown("""
+    <style>
+    .reportview-container {
+        background: url('https://example.com/your-weather-background.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    .sidebar .sidebar-content {
+        background-color: rgba(255, 255, 255, 0.8);
+    }
+    .stButton>button {
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+    }
+    .stButton>button:hover {
+        background-color: #45a049;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
 # Antarmuka pengguna Streamlit
 st.title("Weather Prediction")
