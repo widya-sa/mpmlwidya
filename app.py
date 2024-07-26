@@ -36,7 +36,6 @@ st.markdown("""
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        color: white;
     }
     .sidebar .sidebar-content {
         background-color: rgba(255, 255, 255, 0.8);
