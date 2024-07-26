@@ -1,32 +1,4 @@
 import streamlit as st
-import numpy as np
-import pandas as pd
-import pickle
-
-# Fungsi untuk memuat model dan melakukan prediksi
-def value_predictor(to_predict_list):
-    columns = [
-        'Temperature', 'Humidity', 'Wind Speed', 'Precipitation (%)', 'Cloud Cover',
-        'Atmospheric Pressure', 'UV Index', 'Season', 'Visibility (km)', 'Location'
-    ]
-    to_predict_df = pd.DataFrame([to_predict_list], columns=columns)
-    
-    try:
-        with open('model.pkl', 'rb') as file:
-            loaded_model = pickle.load(file)
-        
-        result = loaded_model.predict(to_predict_df)[0]
-        
-        weather_mapping = {
-            0: 'Cloudy',
-            1: 'Rainy',
-            2: 'Snowy',
-            3: 'Sunny'
-        }
-        
-        return weather_mapping.get(result, 'Unknown')
-    except Exception as e:
-        raise RuntimeError(f"Failed to predict weather: {e}")
 
 # Menambahkan CSS untuk background dan styling
 st.markdown("""
@@ -121,11 +93,6 @@ st.markdown("""
         color: #333;
         margin-bottom: 20px;
     }
-    /* CSS untuk menyembunyikan tombol + dan - pada input number */
-    .stNumberInput .stNumberInput__increment, 
-    .stNumberInput .stNumberInput__decrement {
-        display: none;
-    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -195,7 +162,4 @@ if st.button('Predict'):
         result = value_predictor(to_predict_list)
         st.markdown(f'<div class="prediction-result">Predicted Weather Type: {result}</div>', unsafe_allow_html=True)
     except RuntimeError as e:
-        st.error(f"An error occurred: {str(e)}")
-
-# Menutup div dengan kelas 'main'
-st.markdown('</div>', unsafe_allow_html=True)
+        st.error(f"An error occurred: {e}")
