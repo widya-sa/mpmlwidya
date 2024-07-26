@@ -78,6 +78,16 @@ st.markdown("""
         flex: 1;
         max-width: calc(50% - 10px);
     }
+    .prediction-result {
+        background-color: #f9dcc4; /* Background beige untuk hasil prediksi */
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin-top: 20px;
+        font-size: 18px;
+        text-align: center;
+        color: black;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -123,7 +133,7 @@ if st.button('Predict'):
     
     try:
         result = value_predictor(to_predict_list)
-        st.success(f"Predicted Weather Type: {result}")
+        st.markdown(f'<div class="prediction-result">Predicted Weather Type: {result}</div>', unsafe_allow_html=True)
     except RuntimeError as e:
         st.error(f"An error occurred: {str(e)}")
 
