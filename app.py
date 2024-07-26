@@ -132,38 +132,38 @@ with st.container():
     
     with col1:
         st.markdown('<div class="input-label"><i class="fas fa-temperature-high"></i> Temperature (°C)</div>', unsafe_allow_html=True)
-        temperature = st.number_input('', format="%.1f")
+        temperature = st.number_input('', format="%.1f", key="temperature")
         
         st.markdown('<div class="input-label"><i class="fas fa-tachometer-alt"></i> Humidity (%)</div>', unsafe_allow_html=True)
-        humidity = st.number_input('', format="%.1f")
+        humidity = st.number_input('', format="%.1f", key="humidity")
         
         st.markdown('<div class="input-label"><i class="fas fa-wind"></i> Wind Speed (km/h)</div>', unsafe_allow_html=True)
-        wind_speed = st.number_input('', format="%.1f")
+        wind_speed = st.number_input('', format="%.1f", key="wind_speed")
         
         st.markdown('<div class="input-label"><i class="fas fa-cloud-showers-heavy"></i> Precipitation (%)</div>', unsafe_allow_html=True)
-        precipitation = st.number_input('', format="%.1f")
+        precipitation = st.number_input('', format="%.1f", key="precipitation")
         
         st.markdown('<div class="input-label"><i class="fas fa-cloud"></i> Atmospheric Pressure (hPa)</div>', unsafe_allow_html=True)
-        atmospheric_pressure = st.number_input('', format="%.1f")
+        atmospheric_pressure = st.number_input('', format="%.1f", key="atmospheric_pressure")
     
     with col2:
         st.markdown('<div class="input-label"><i class="fas fa-cloud-sun"></i> Cloud Cover</div>', unsafe_allow_html=True)
         cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
-        cloud_cover = st.selectbox('', options=list(cloud_cover_options.keys()))
+        cloud_cover = st.selectbox('', options=list(cloud_cover_options.keys()), key="cloud_cover")
         
         st.markdown('<div class="input-label"><i class="fas fa-calendar-season"></i> Season</div>', unsafe_allow_html=True)
         season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
-        season = st.selectbox('', options=list(season_options.keys()))
+        season = st.selectbox('', options=list(season_options.keys()), key="season")
         
         st.markdown('<div class="input-label"><i class="fas fa-map-marker-alt"></i> Location</div>', unsafe_allow_html=True)
         location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
-        location = st.selectbox('', options=list(location_options.keys()))
+        location = st.selectbox('', options=list(location_options.keys()), key="location")
         
         st.markdown('<div class="input-label"><i class="fas fa-sun"></i> UV Index</div>', unsafe_allow_html=True)
-        uv_index = st.number_input('', format="%.1f")
+        uv_index = st.number_input('', format="%.1f", key="uv_index")
         
         st.markdown('<div class="input-label"><i class="fas fa-eye"></i> Visibility (km)</div>', unsafe_allow_html=True)
-        visibility = st.number_input('', format="%.1f")
+        visibility = st.number_input('', format="%.1f", key="visibility")
 
 st.markdown('</div>', unsafe_allow_html=True)
 
