@@ -53,6 +53,8 @@ st.markdown("""
         cursor: pointer;
         border-radius: 12px;
         z-index: 10; /* Memastikan tombol berada di atas latar belakang */
+        width: 100%; /* Membuat tombol penuh lebar kolom */
+        box-sizing: border-box;
     }
     .stButton>button:hover {
         background-color: #f4b9a7;  /* Warna beige lebih gelap saat hover */
@@ -70,14 +72,14 @@ st.markdown("""
         background: #f9dcc4;
         color: black;
     }
-    .stColumns {
+    .title {
         display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
+        align-items: center;
+        gap: 10px; /* Spasi antara ikon dan teks */
     }
-    .stColumn {
-        flex: 1;
-        max-width: calc(50% - 10px);
+    .fa-sun {
+        color: black; /* Warna ikon matahari hitam */
+        font-size: 24px; /* Ukuran ikon */
     }
     </style>
 """, unsafe_allow_html=True)
@@ -86,7 +88,7 @@ st.markdown("""
 st.markdown('<div class="main">', unsafe_allow_html=True)
 
 # Antarmuka pengguna Streamlit
-st.title("Weather Prediction")
+st.markdown('<div class="title"><i class="fa fa-sun"></i><h1>Weather Prediction</h1></div>', unsafe_allow_html=True)
 st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
 # Membagi input form menjadi dua kolom dengan 5 input di masing-masing kolom
