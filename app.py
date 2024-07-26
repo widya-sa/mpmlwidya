@@ -56,8 +56,8 @@ visibility = st.number_input('Visibility (km)')
 # Tombol prediksi
 if st.button('Predict'):
     to_predict_list = [
-        Temperature, Humidity, Wind_speed, Precipitation,
-        Cloud_cover, Atmospheric Pressure, UV Index, Season,
+        Temperature, Humidity, Wind Speed, Precipitation,
+        Cloud Cover, Atmospheric Pressure, UV Index, Season,
         Visibility, Location
     ]
     
