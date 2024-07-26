@@ -98,13 +98,13 @@ st.markdown("""
     }
     .input-row {
         display: flex;
-        flex-wrap: wrap;
+        justify-content: space-between;
         gap: 20px;
+        margin-bottom: 20px;
     }
     .input-col {
         flex: 1;
-        min-width: 0;
-        max-width: calc(100% / 5 - 20px); /* Lebar kolom 1/5 dari container */
+        max-width: calc(50% - 10px); /* Lebar kolom 50% dari container */
     }
     </style>
 """, unsafe_allow_html=True)
@@ -116,7 +116,7 @@ st.markdown('<div class="main">', unsafe_allow_html=True)
 st.title("Weather Prediction")
 st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
-# Membagi input form menjadi dua baris dengan 5 input di setiap baris
+# Fungsi untuk menampilkan input dengan ikon
 def create_input_row(inputs):
     st.markdown('<div class="input-row">', unsafe_allow_html=True)
     for input_item in inputs:
@@ -145,8 +145,10 @@ inputs_row2 = [
 ]
 
 # Menampilkan input dalam baris
-create_input_row(inputs_row1)
-create_input_row(inputs_row2)
+create_input_row(inputs_row1[:2])
+create_input_row(inputs_row1[2:])
+create_input_row(inputs_row2[:2])
+create_input_row(inputs_row2[2:])
 
 # Tombol prediksi
 if st.button('Predict'):
