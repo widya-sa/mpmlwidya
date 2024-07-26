@@ -36,13 +36,18 @@ st.markdown("""
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        color: white;
+        height: 100vh; /* Memastikan tinggi sesuai dengan viewport */
+        overflow: auto;
+        position: relative;
+        padding: 20px; /* Menambahkan padding untuk ruang di sekeliling konten */
     }
     .sidebar .sidebar-content {
         background-color: rgba(255, 255, 255, 0.8);
     }
     .stButton>button {
-        background-color: #4CAF50;  /* Warna hijau untuk tombol */
-        color: white;
+        background-color: #f9dcc4;  /* Warna beige untuk tombol */
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -55,19 +60,19 @@ st.markdown("""
         z-index: 10; /* Memastikan tombol berada di atas latar belakang */
     }
     .stButton>button:hover {
-        background-color: #45a049;  /* Warna hijau lebih gelap saat hover */
+        background-color: #f4b9a7;  /* Warna beige lebih gelap saat hover */
     }
     .stSelectbox, .stNumberInput, .stTextInput, .stTextArea {
-        background: beige; /* Background warna beige untuk input fields */
+        background: #f9dcc4; /* Background beige */
         color: black;
         border-radius: 10px;
-        border: 2px solid #4CAF50; /* Menambahkan border dengan warna hijau */
+        border: 2px solid #f4b9a7; /* Border beige lebih gelap */
         padding: 10px;
         margin: 10px 0;
         box-sizing: border-box;
     }
     .stSelectbox>div, .stNumberInput>div, .stTextInput>div, .stTextArea>div {
-        background: beige;
+        background: #f9dcc4;
         color: black;
     }
     </style>
