@@ -104,16 +104,6 @@ st.markdown("""
         width: 100%; /* Lebar penuh untuk konten */
         max-width: 100%; /* Menghindari pembatasan lebar */
     }
-    .stColumns {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-    .stColumn {
-        flex: 1;
-        min-width: 0;
-        max-width: 100%;
-    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -129,53 +119,39 @@ cloud_cover_mapping = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 
 season_mapping = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
 location_mapping = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
 
-# Membagi input form menjadi dua kolom per baris
+# Fungsi untuk menampilkan input dalam satu kolom per baris
 def create_input_row(inputs):
-    cols = st.columns(len(inputs))
-    for i, input_item in enumerate(inputs):
-        with cols[i]:
-            st.markdown(f'<div class="input-container"><i class="fas {input_item[1]}"></i><span class="input-label">{input_item[0]}</span>', unsafe_allow_html=True)
-            if input_item[0] == 'Cloud Cover':
-                value = st.selectbox('', options=list(input_item[2].keys()), key=input_item[3])
-                st.session_state[input_item[3]] = map_input_to_value(value, input_item[2])
-            elif input_item[0] == 'Season':
-                value = st.selectbox('', options=list(input_item[2].keys()), key=input_item[3])
-                st.session_state[input_item[3]] = map_input_to_value(value, input_item[2])
-            elif input_item[0] == 'Location':
-                value = st.selectbox('', options=list(input_item[2].keys()), key=input_item[3])
-                st.session_state[input_item[3]] = map_input_to_value(value, input_item[2])
-            else:
-                st.session_state[input_item[3]] = st.number_input('', key=input_item[3])
-            st.markdown('</div>', unsafe_allow_html=True)
+    for input_item in inputs:
+        st.markdown(f'<div class="input-container"><i class="fas {input_item[1]}"></i><span class="input-label">{input_item[0]}</span>', unsafe_allow_html=True)
+        if input_item[0] == 'Cloud Cover':
+            value = st.selectbox('', options=list(input_item[2].keys()), key=input_item[3])
+            st.session_state[input_item[3]] = map_input_to_value(value, input_item[2])
+        elif input_item[0] == 'Season':
+            value = st.selectbox('', options=list(input_item[2].keys()), key=input_item[3])
+            st.session_state[input_item[3]] = map_input_to_value(value, input_item[2])
+        elif input_item[0] == 'Location':
+            value = st.selectbox('', options=list(input_item[2].keys()), key=input_item[3])
+            st.session_state[input_item[3]] = map_input_to_value(value, input_item[2])
+        else:
+            st.session_state[input_item[3]] = st.number_input('', key=input_item[3])
+        st.markdown('</div>', unsafe_allow_html=True)
 
-# Definisi input untuk baris pertama dan kedua
-inputs_row1 = [
+# Definisi input untuk baris pertama hingga terakhir
+inputs = [
     ('Temperature (°C)', 'fa-thermometer-half', None, 'temp'),
-    ('Humidity (%)', 'fa-tint', None, 'humidity')
-]
-inputs_row2 = [
+    ('Humidity (%)', 'fa-tint', None, 'humidity'),
     ('Wind Speed (km/h)', 'fa-wind', None, 'wind_speed'),
-    ('Precipitation (%)', 'fa-cloud-showers-heavy', None, 'precipitation')
-]
-inputs_row3 = [
+    ('Precipitation (%)', 'fa-cloud-showers-heavy', None, 'precipitation'),
     ('Atmospheric Pressure (hPa)', 'fa-gauge', None, 'pressure'),
-    ('Cloud Cover', 'fa-cloud', cloud_cover_mapping, 'cloud_cover')
-]
-inputs_row4 = [
+    ('Cloud Cover', 'fa-cloud', cloud_cover_mapping, 'cloud_cover'),
     ('Season', 'fa-calendar-season', season_mapping, 'season'),
-    ('Location', 'fa-map-marker-alt', location_mapping, 'location')
-]
-inputs_row5 = [
+    ('Location', 'fa-map-marker-alt', location_mapping, 'location'),
     ('UV Index', 'fa-sun', None, 'uv_index'),
     ('Visibility (km)', 'fa-eye', None, 'visibility')
 ]
 
-# Menampilkan input dalam baris
-create_input_row(inputs_row1)
-create_input_row(inputs_row2)
-create_input_row(inputs_row3)
-create_input_row(inputs_row4)
-create_input_row(inputs_row5)
+# Menampilkan input dalam satu kolom per baris
+create_input_row(inputs)
 
 # Tombol prediksi
 if st.button('Predict'):
