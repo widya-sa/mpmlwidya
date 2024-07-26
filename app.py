@@ -42,7 +42,7 @@ st.markdown("""
         background-color: rgba(255, 255, 255, 0.8);
     }
     .stButton>button {
-        background-color: #4CAF50;
+        background-color: #4CAF50;  /* Warna hijau untuk tombol */
         color: white;
         border: none;
         padding: 10px 20px;
@@ -55,7 +55,7 @@ st.markdown("""
         border-radius: 12px;
     }
     .stButton>button:hover {
-        background-color: #45a049;
+        background-color: #45a049;  /* Warna hijau lebih gelap saat hover */
     }
     .stSelectbox, .stNumberInput {
         background: rgba(255, 255, 255, 0.8);
