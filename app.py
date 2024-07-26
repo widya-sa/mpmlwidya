@@ -36,11 +36,6 @@ st.markdown("""
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        color: white;
-        height: 100vh; /* Memastikan tinggi sesuai dengan viewport */
-        overflow: auto;
-        position: relative;
-        padding: 20px; /* Menambahkan padding untuk ruang di sekeliling konten */
     }
     .sidebar .sidebar-content {
         background-color: rgba(255, 255, 255, 0.8);
