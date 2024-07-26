@@ -41,6 +41,9 @@ st.markdown("""
         color: white;
         height: 100vh; /* Memastikan tinggi sesuai dengan viewport */
         padding: 20px; /* Menambahkan padding untuk ruang di sekeliling konten */
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Menyelaraskan konten secara vertikal di tengah */
     }
     .stButton>button {
         background-color: #f9dcc4;  /* Warna beige untuk tombol */
@@ -116,7 +119,7 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.markdown('<div class="input-row">', unsafe_allow_html=True)
-    
+
     st.markdown('<div class="input-container">', unsafe_allow_html=True)
     st.markdown('<label for="temperature"><i class="fas fa-temperature-high"></i> Temperature (°C)</label>', unsafe_allow_html=True)
     temperature = st.number_input('', key='temperature')
