@@ -1,11 +1,13 @@
 import streamlit as st
-import joblib
+import pickle
 import numpy as np
 
 # Fungsi untuk memuat model dan melakukan prediksi
 def value_predictor(to_predict_list):
     to_predict = np.array(to_predict_list).reshape(1, -1)  # Membentuk array 2D dengan 1 baris dan 10 kolom
-    loaded_model = joblib.load('model.sav')
+    # Memuat model
+    with open('model.pkl', 'rb') as file:
+        loaded_model = pickle.load(file)
     result = loaded_model.predict(to_predict)[0]  # Ambil hasil prediksi
     weather_mapping = {
         0: 'Cloudy',
@@ -18,7 +20,7 @@ def value_predictor(to_predict_list):
 # Antarmuka pengguna Streamlit
 st.title("Weather Prediction")
 
-# Input form
+# Formulir input
 temperature = st.number_input('Temperature', format="%f")
 humidity = st.number_input('Humidity', format="%f")
 wind_speed = st.number_input('Wind Speed', format="%f")
@@ -42,4 +44,4 @@ if st.button('Predict'):
         result = value_predictor(to_predict_list)
         st.write(f"Predicted Weather Type: {result}")
     except Exception as e:
-        st.error(f"An error occurred: {str(e)}")
+        st.error(f"Terjadi kesalahan: {str(e)}")
