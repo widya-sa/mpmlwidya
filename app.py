@@ -74,24 +74,25 @@ st.markdown("""
 st.title("Weather Prediction")
 st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
-# Input form
-temperature = st.number_input('Temperature (°C)')
-humidity = st.number_input('Humidity (%)')
-wind_speed = st.number_input('Wind Speed (km/h)')
-precipitation = st.number_input('Precipitation (%)')
+# Membagi input form menjadi dua kolom
+col1, col2 = st.columns(2)
 
-cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
-cloud_cover = st.selectbox('Cloud Cover', options=list(cloud_cover_options.keys()))
+with col1:
+    temperature = st.number_input('Temperature (°C)')
+    humidity = st.number_input('Humidity (%)')
+    wind_speed = st.number_input('Wind Speed (km/h)')
+    precipitation = st.number_input('Precipitation (%)')
+    atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)')
+    uv_index = st.number_input('UV Index')
 
-atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)')
-season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
-season = st.selectbox('Season', options=list(season_options.keys()))
-
-location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
-location = st.selectbox('Location', options=list(location_options.keys()))
-
-uv_index = st.number_input('UV Index')
-visibility = st.number_input('Visibility (km)')
+with col2:
+    cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
+    cloud_cover = st.selectbox('Cloud Cover', options=list(cloud_cover_options.keys()))
+    season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
+    season = st.selectbox('Season', options=list(season_options.keys()))
+    location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
+    location = st.selectbox('Location', options=list(location_options.keys()))
+    visibility = st.number_input('Visibility (km)')
 
 # Tombol prediksi
 if st.button('Predict'):
