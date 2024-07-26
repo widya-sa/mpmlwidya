@@ -5,7 +5,7 @@ import numpy as np
 # Fungsi untuk memuat model dan melakukan prediksi
 def value_predictor(to_predict_list):
     to_predict = np.array(to_predict_list).reshape(1, -1)  # Membentuk array 2D dengan 1 baris dan 10 kolom
-    loaded_model = joblib.load('model.sav')
+    loaded_model = joblib.load('model.pkl', 'wb')
     result = loaded_model.predict(to_predict)[0]  # Ambil hasil prediksi
     weather_mapping = {
         0: 'Cloudy',
