@@ -32,7 +32,7 @@ def value_predictor(to_predict_list):
 st.markdown("""
     <style>
     .reportview-container {
-        background: url('https://raw.githubusercontent.com/widya-sa/mpmlwidya/main/images/beach.jpg');
+        background-image: url('https://raw.githubusercontent.com/widya-sa/mpmlwidya/main/images/beach.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
