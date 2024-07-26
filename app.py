@@ -1,12 +1,11 @@
 import streamlit as st
 import joblib
 import numpy as np
-import sklearn.metrics
 
 # Fungsi untuk memuat model dan melakukan prediksi
 def value_predictor(to_predict_list):
     to_predict = np.array(to_predict_list).reshape(1, -1)  # Membentuk array 2D dengan 1 baris dan 10 kolom
-    loaded_model = joblib.load('model.pkl', 'wb')
+    loaded_model = joblib.load('model.sav')
     result = loaded_model.predict(to_predict)[0]  # Ambil hasil prediksi
     weather_mapping = {
         0: 'Cloudy',
@@ -20,10 +19,10 @@ def value_predictor(to_predict_list):
 st.title("Weather Prediction")
 
 # Input form
-temperature = st.number_input('Temperature')
-humidity = st.number_input('Humidity')
-wind_speed = st.number_input('Wind Speed')
-precipitation = st.number_input('Precipitation (%)')
+temperature = st.number_input('Temperature', min_value=0.0)
+humidity = st.number_input('Humidity', min_value=0.0)
+wind_speed = st.number_input('Wind Speed', min_value=0.0)
+precipitation = st.number_input('Precipitation (%)', min_value=0.0)
 
 # Dropdown untuk Cloud Cover
 cloud_cover = st.selectbox('Cloud Cover', options={
@@ -49,9 +48,9 @@ location = st.selectbox('Location', options={
 })
 
 # Inputan lainnya
-atmospheric_pressure = st.number_input('Atmospheric Pressure')
-uv_index = st.number_input('UV Index')
-visibility = st.number_input('Visibility (km)')
+atmospheric_pressure = st.number_input('Atmospheric Pressure', min_value=0.0)
+uv_index = st.number_input('UV Index', min_value=0.0)
+visibility = st.number_input('Visibility (km)', min_value=0.0)
 
 # Tombol prediksi
 if st.button('Predict'):
