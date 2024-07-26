@@ -36,9 +36,9 @@ st.markdown("""
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-    }
-    .sidebar .sidebar-content {
-        background-color: rgba(255, 255, 255, 0.8);
+        padding: 20px;
+        color: white;
+        min-height: 100vh;
     }
     .stButton>button {
         background-color: #f9dcc4;  /* Warna beige untuk tombol */
@@ -53,6 +53,8 @@ st.markdown("""
         cursor: pointer;
         border-radius: 12px;
         z-index: 10; /* Memastikan tombol berada di atas latar belakang */
+        width: 100%; /* Membuat tombol penuh lebar kolom */
+        box-sizing: border-box;
     }
     .stButton>button:hover {
         background-color: #f4b9a7;  /* Warna beige lebih gelap saat hover */
@@ -70,6 +72,15 @@ st.markdown("""
         background: #f9dcc4;
         color: black;
     }
+    .stColumns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .stColumn {
+        flex: 1;
+        max-width: calc(50% - 10px);
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -81,24 +92,29 @@ st.title("Weather Prediction")
 st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
 # Membagi input form menjadi dua kolom dengan 5 input di masing-masing kolom
-col1, col2 = st.columns(2)
+st.markdown('<div class="stColumns">', unsafe_allow_html=True)
 
-with col1:
-    temperature = st.number_input('Temperature (°C)')
-    humidity = st.number_input('Humidity (%)')
-    wind_speed = st.number_input('Wind Speed (km/h)')
-    precipitation = st.number_input('Precipitation (%)')
-    atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)')
+with st.container():
+    col1, col2 = st.columns(2)
+    
+    with col1:
+        temperature = st.number_input('Temperature (°C)')
+        humidity = st.number_input('Humidity (%)')
+        wind_speed = st.number_input('Wind Speed (km/h)')
+        precipitation = st.number_input('Precipitation (%)')
+        atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)')
+    
+    with col2:
+        cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
+        cloud_cover = st.selectbox('Cloud Cover', options=list(cloud_cover_options.keys()))
+        season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
+        season = st.selectbox('Season', options=list(season_options.keys()))
+        location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
+        location = st.selectbox('Location', options=list(location_options.keys()))
+        uv_index = st.number_input('UV Index')
+        visibility = st.number_input('Visibility (km)')
 
-with col2:
-    cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
-    cloud_cover = st.selectbox('Cloud Cover', options=list(cloud_cover_options.keys()))
-    season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
-    season = st.selectbox('Season', options=list(season_options.keys()))
-    location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
-    location = st.selectbox('Location', options=list(location_options.keys()))
-    uv_index = st.number_input('UV Index')
-    visibility = st.number_input('Visibility (km)')
+st.markdown('</div>', unsafe_allow_html=True)
 
 # Tombol prediksi
 if st.button('Predict'):
