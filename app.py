@@ -18,42 +18,43 @@ def value_predictor(to_predict_list):
 
 # Antarmuka pengguna Streamlit
 st.title("Weather Prediction")
+st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
-# Input form
-temperature = st.number_input('Temperature')
-humidity = st.number_input('Humidity')
-wind_speed = st.number_input('Wind Speed')
-precipitation = st.number_input('Precipitation (%)')
+# Membagi form menjadi dua kolom
+col1, col2 = st.columns(2)
 
-# Dropdown untuk Cloud Cover
-cloud_cover = st.selectbox('Cloud Cover', options={
-    'Clear': 0,
-    'Cloudy': 1,
-    'Overcast': 2,
-    'Partly Cloudy': 3
-})
+with col1:
+    st.subheader("Data Cuaca")
+    temperature = st.number_input('Temperature (°C)', min_value=0.0, format="%.2f")
+    humidity = st.number_input('Humidity (%)', min_value=0.0, format="%.2f")
+    wind_speed = st.number_input('Wind Speed (km/h)', min_value=0.0, format="%.2f")
+    precipitation = st.number_input('Precipitation (%)', min_value=0.0, format="%.2f")
+    atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)', min_value=0.0, format="%.2f")
 
-# Dropdown untuk Season
-season = st.selectbox('Season', options={
-    'Autumn': 0,
-    'Spring': 1,
-    'Summer': 2,
-    'Winter': 3
-})
-
-# Dropdown untuk Location
-location = st.selectbox('Location', options={
-    'Coastal': 0,
-    'Inland': 1,
-    'Mountain': 2
-})
-
-# Inputan lainnya
-atmospheric_pressure = st.number_input('Atmospheric Pressure')
-uv_index = st.number_input('UV Index')
-visibility = st.number_input('Visibility (km)')
+with col2:
+    st.subheader("Kondisi Cuaca")
+    cloud_cover = st.selectbox('Cloud Cover', options={
+        'Clear': 0,
+        'Cloudy': 1,
+        'Overcast': 2,
+        'Partly Cloudy': 3
+    })
+    season = st.selectbox('Season', options={
+        'Autumn': 0,
+        'Spring': 1,
+        'Summer': 2,
+        'Winter': 3
+    })
+    location = st.selectbox('Location', options={
+        'Coastal': 0,
+        'Inland': 1,
+        'Mountain': 2
+    })
+    uv_index = st.number_input('UV Index', min_value=0.0, format="%.2f")
+    visibility = st.number_input('Visibility (km)', min_value=0.0, format="%.2f")
 
 # Tombol prediksi
+st.markdown("---")
 if st.button('Predict'):
     to_predict_list = [
         temperature, humidity, wind_speed, precipitation,
@@ -63,6 +64,6 @@ if st.button('Predict'):
     
     try:
         result = value_predictor(to_predict_list)
-        st.write(f"Predicted Weather Type: {result}")
+        st.success(f"Predicted Weather Type: {result}")
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
