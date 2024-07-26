@@ -6,8 +6,8 @@ import pickle
 # Fungsi untuk memuat model dan melakukan prediksi
 def value_predictor(to_predict_list):
     columns = [
-        'Temperature', 'Humidity', 'Wind Speed', 'Precipitation', 'Cloud Cover',
-        'Atmospheric Pressure', 'UV Index', 'Season', 'Visibility', 'Location'
+        'Temperature', 'Humidity', 'Wind Speed', 'Precipitation (%)', 'Cloud Cover',
+        'Atmospheric Pressure', 'UV Index', 'Season', 'Visibility (km)', 'Location'
     ]
     to_predict_df = pd.DataFrame([to_predict_list], columns=columns)
     
