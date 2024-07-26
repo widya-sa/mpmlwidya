@@ -28,6 +28,10 @@ def value_predictor(to_predict_list):
     except Exception as e:
         raise RuntimeError(f"Failed to predict weather: {e}")
 
+# Fungsi untuk mengonversi input string ke nilai numerik
+def map_input_to_value(value, mapping):
+    return mapping.get(value, -1)
+
 # Menambahkan CSS untuk background, styling, dan ikon
 st.markdown("""
     <style>
@@ -120,16 +124,28 @@ st.markdown('<div class="main">', unsafe_allow_html=True)
 st.title("Weather Prediction")
 st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
+# Definisi mapping untuk input
+cloud_cover_mapping = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
+season_mapping = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
+location_mapping = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
+
 # Membagi input form menjadi dua kolom per baris
 def create_input_row(inputs):
     cols = st.columns(len(inputs))
     for i, input_item in enumerate(inputs):
         with cols[i]:
             st.markdown(f'<div class="input-container"><i class="fas {input_item[1]}"></i><span class="input-label">{input_item[0]}</span>', unsafe_allow_html=True)
-            if input_item[0] == 'Cloud Cover' or input_item[0] == 'Season' or input_item[0] == 'Location':
-                st.selectbox('', options=input_item[2], key=input_item[3])
+            if input_item[0] == 'Cloud Cover':
+                value = st.selectbox('', options=list(input_item[2].keys()), key=input_item[3])
+                st.session_state[input_item[3]] = map_input_to_value(value, input_item[2])
+            elif input_item[0] == 'Season':
+                value = st.selectbox('', options=list(input_item[2].keys()), key=input_item[3])
+                st.session_state[input_item[3]] = map_input_to_value(value, input_item[2])
+            elif input_item[0] == 'Location':
+                value = st.selectbox('', options=list(input_item[2].keys()), key=input_item[3])
+                st.session_state[input_item[3]] = map_input_to_value(value, input_item[2])
             else:
-                st.number_input('', key=input_item[3])
+                st.session_state[input_item[3]] = st.number_input('', key=input_item[3])
             st.markdown('</div>', unsafe_allow_html=True)
 
 # Definisi input untuk baris pertama dan kedua
@@ -143,11 +159,11 @@ inputs_row2 = [
 ]
 inputs_row3 = [
     ('Atmospheric Pressure (hPa)', 'fa-gauge', None, 'pressure'),
-    ('Cloud Cover', 'fa-cloud', {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}, 'cloud_cover')
+    ('Cloud Cover', 'fa-cloud', cloud_cover_mapping, 'cloud_cover')
 ]
 inputs_row4 = [
-    ('Season', 'fa-calendar-season', {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}, 'season'),
-    ('Location', 'fa-map-marker-alt', {'Coastal': 0, 'Inland': 1, 'Mountain': 2}, 'location')
+    ('Season', 'fa-calendar-season', season_mapping, 'season'),
+    ('Location', 'fa-map-marker-alt', location_mapping, 'location')
 ]
 inputs_row5 = [
     ('UV Index', 'fa-sun', None, 'uv_index'),
