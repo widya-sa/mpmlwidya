@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import joblib
+import pickle
 
 # Fungsi untuk memuat model dan melakukan prediksi
 def value_predictor(to_predict_list):
@@ -13,7 +13,7 @@ def value_predictor(to_predict_list):
     
     try:
         with open('model.pkl', 'rb') as file:
-            loaded_model = joblib.load(file)
+            loaded_model = pickle.load(file)
         
         result = loaded_model.predict(to_predict_df)[0]
         
