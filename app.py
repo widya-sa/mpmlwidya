@@ -1,4 +1,5 @@
 import streamlit as st
+import numpy as np
 import pandas as pd
 import pickle
 
@@ -27,7 +28,7 @@ def value_predictor(to_predict_list):
     except Exception as e:
         raise RuntimeError(f"Failed to predict weather: {e}")
 
-# Menambahkan CSS untuk background, styling, dan ikon
+# Menambahkan CSS untuk background dan styling
 st.markdown("""
     <style>
     .main {
@@ -63,19 +64,10 @@ st.markdown("""
         padding: 10px;
         margin: 10px 0;
         box-sizing: border-box;
-        display: flex;
-        align-items: center;
-    }
-    .stSelectbox img, .stNumberInput img, .stTextInput img, .stTextArea img {
-        margin-right: 10px; /* Jarak antara ikon dan teks input */
-        height: 24px; /* Ukuran ikon */
-        width: 24px;
     }
     .stSelectbox>div, .stNumberInput>div, .stTextInput>div, .stTextArea>div {
         background: #f9dcc4;
         color: black;
-        display: flex;
-        align-items: center;
     }
     .stColumns {
         display: flex;
@@ -113,31 +105,21 @@ with st.container():
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/thermometer-half.svg" alt="Temp Icon">Temperature (°C)</div>', unsafe_allow_html=True)
-        temperature = st.number_input('')
-        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/tint.svg" alt="Humidity Icon">Humidity (%)</div>', unsafe_allow_html=True)
-        humidity = st.number_input('')
-        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/wind.svg" alt="Wind Speed Icon">Wind Speed (km/h)</div>', unsafe_allow_html=True)
-        wind_speed = st.number_input('')
-        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/cloud-rain.svg" alt="Precipitation Icon">Precipitation (%)</div>', unsafe_allow_html=True)
-        precipitation = st.number_input('')
-        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/cloud.svg" alt="Pressure Icon">Atmospheric Pressure (hPa)</div>', unsafe_allow_html=True)
-        atmospheric_pressure = st.number_input('')
+        temperature = st.number_input('Temperature (°C)')
+        humidity = st.number_input('Humidity (%)')
+        wind_speed = st.number_input('Wind Speed (km/h)')
+        precipitation = st.number_input('Precipitation (%)')
+        atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)')
     
     with col2:
-        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/cloud-sun.svg" alt="Cloud Cover Icon">Cloud Cover</div>', unsafe_allow_html=True)
         cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
-        cloud_cover = st.selectbox('', options=list(cloud_cover_options.keys()))
-        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/calendar.svg" alt="Season Icon">Season</div>', unsafe_allow_html=True)
+        cloud_cover = st.selectbox('Cloud Cover', options=list(cloud_cover_options.keys()))
         season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
-        season = st.selectbox('', options=list(season_options.keys()))
-        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/earth-americas.svg" alt="Location Icon">Location</div>', unsafe_allow_html=True)
+        season = st.selectbox('Season', options=list(season_options.keys()))
         location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
-        location = st.selectbox('', options=list(location_options.keys()))
-        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/sun.svg" alt="UV Index Icon">UV Index</div>', unsafe_allow_html=True)
-        uv_index = st.number_input('')
-        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/eye.svg" alt="Visibility Icon">Visibility (km)</div>', unsafe_allow_html=True)
-        visibility = st.number_input('')
+        location = st.selectbox('Location', options=list(location_options.keys()))
+        uv_index = st.number_input('UV Index')
+        visibility = st.number_input('Visibility (km)')
 
 st.markdown('</div>', unsafe_allow_html=True)
 
