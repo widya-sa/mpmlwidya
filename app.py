@@ -1,5 +1,4 @@
 import streamlit as st
-import numpy as np
 import pandas as pd
 import pickle
 
@@ -114,30 +113,30 @@ with st.container():
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown('<div><img src="https://example.com/temperature-icon.png" alt="Temp Icon">Temperature (°C)</div>', unsafe_allow_html=True)
+        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/thermometer-half.svg" alt="Temp Icon">Temperature (°C)</div>', unsafe_allow_html=True)
         temperature = st.number_input('')
-        st.markdown('<div><img src="https://example.com/humidity-icon.png" alt="Humidity Icon">Humidity (%)</div>', unsafe_allow_html=True)
+        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/tint.svg" alt="Humidity Icon">Humidity (%)</div>', unsafe_allow_html=True)
         humidity = st.number_input('')
-        st.markdown('<div><img src="https://example.com/wind-speed-icon.png" alt="Wind Speed Icon">Wind Speed (km/h)</div>', unsafe_allow_html=True)
+        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/wind.svg" alt="Wind Speed Icon">Wind Speed (km/h)</div>', unsafe_allow_html=True)
         wind_speed = st.number_input('')
-        st.markdown('<div><img src="https://example.com/precipitation-icon.png" alt="Precipitation Icon">Precipitation (%)</div>', unsafe_allow_html=True)
+        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/cloud-rain.svg" alt="Precipitation Icon">Precipitation (%)</div>', unsafe_allow_html=True)
         precipitation = st.number_input('')
-        st.markdown('<div><img src="https://example.com/atmospheric-pressure-icon.png" alt="Pressure Icon">Atmospheric Pressure (hPa)</div>', unsafe_allow_html=True)
+        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/cloud.svg" alt="Pressure Icon">Atmospheric Pressure (hPa)</div>', unsafe_allow_html=True)
         atmospheric_pressure = st.number_input('')
     
     with col2:
-        st.markdown('<div><img src="https://example.com/cloud-cover-icon.png" alt="Cloud Cover Icon">Cloud Cover</div>', unsafe_allow_html=True)
+        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/cloud-sun.svg" alt="Cloud Cover Icon">Cloud Cover</div>', unsafe_allow_html=True)
         cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
         cloud_cover = st.selectbox('', options=list(cloud_cover_options.keys()))
-        st.markdown('<div><img src="https://example.com/season-icon.png" alt="Season Icon">Season</div>', unsafe_allow_html=True)
+        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/calendar.svg" alt="Season Icon">Season</div>', unsafe_allow_html=True)
         season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
         season = st.selectbox('', options=list(season_options.keys()))
-        st.markdown('<div><img src="https://example.com/location-icon.png" alt="Location Icon">Location</div>', unsafe_allow_html=True)
+        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/earth-americas.svg" alt="Location Icon">Location</div>', unsafe_allow_html=True)
         location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
         location = st.selectbox('', options=list(location_options.keys()))
-        st.markdown('<div><img src="https://example.com/uv-index-icon.png" alt="UV Index Icon">UV Index</div>', unsafe_allow_html=True)
+        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/sun.svg" alt="UV Index Icon">UV Index</div>', unsafe_allow_html=True)
         uv_index = st.number_input('')
-        st.markdown('<div><img src="https://example.com/visibility-icon.png" alt="Visibility Icon">Visibility (km)</div>', unsafe_allow_html=True)
+        st.markdown('<div><img src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/svgs/solid/eye.svg" alt="Visibility Icon">Visibility (km)</div>', unsafe_allow_html=True)
         visibility = st.number_input('')
 
 st.markdown('</div>', unsafe_allow_html=True)
