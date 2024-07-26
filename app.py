@@ -67,10 +67,19 @@ st.markdown("""
         padding: 10px;
         margin: 10px 0;
         box-sizing: border-box;
+        display: flex;
+        align-items: center;
     }
     .stSelectbox>div, .stNumberInput>div, .stTextInput>div, .stTextArea>div {
         background: #f9dcc4;
         color: black;
+        display: flex;
+        align-items: center;
+    }
+    .icon {
+        margin-right: 10px;
+        font-size: 20px; /* Ukuran ikon */
+        color: black; /* Warna ikon */
     }
     .title {
         display: flex;
@@ -92,29 +101,52 @@ st.markdown('<div class="title"><i class="fa fa-sun"></i><h1>Weather Prediction<
 st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
 # Membagi input form menjadi dua kolom dengan 5 input di masing-masing kolom
-st.markdown('<div class="stColumns">', unsafe_allow_html=True)
+col1, col2 = st.columns(2)
 
-with st.container():
-    col1, col2 = st.columns(2)
+with col1:
+    st.markdown('<div class="stSelectbox"><i class="fa fa-thermometer-half icon"></i>' +
+                '<input type="number" placeholder="Temperature (°C)" /></div>', unsafe_allow_html=True)
+    temperature = st.number_input('', format='%d')
     
-    with col1:
-        temperature = st.number_input('Temperature (°C)')
-        humidity = st.number_input('Humidity (%)')
-        wind_speed = st.number_input('Wind Speed (km/h)')
-        precipitation = st.number_input('Precipitation (%)')
-        atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)')
+    st.markdown('<div class="stSelectbox"><i class="fa fa-tint icon"></i>' +
+                '<input type="number" placeholder="Humidity (%)" /></div>', unsafe_allow_html=True)
+    humidity = st.number_input('', format='%d')
     
-    with col2:
-        cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
-        cloud_cover = st.selectbox('Cloud Cover', options=list(cloud_cover_options.keys()))
-        season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
-        season = st.selectbox('Season', options=list(season_options.keys()))
-        location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
-        location = st.selectbox('Location', options=list(location_options.keys()))
-        uv_index = st.number_input('UV Index')
-        visibility = st.number_input('Visibility (km)')
+    st.markdown('<div class="stSelectbox"><i class="fa fa-wind icon"></i>' +
+                '<input type="number" placeholder="Wind Speed (km/h)" /></div>', unsafe_allow_html=True)
+    wind_speed = st.number_input('', format='%d')
+    
+    st.markdown('<div class="stSelectbox"><i class="fa fa-cloud-rain icon"></i>' +
+                '<input type="number" placeholder="Precipitation (%)" /></div>', unsafe_allow_html=True)
+    precipitation = st.number_input('', format='%d')
+    
+    st.markdown('<div class="stSelectbox"><i class="fa fa-cloud icon"></i>' +
+                '<input type="number" placeholder="Atmospheric Pressure (hPa)" /></div>', unsafe_allow_html=True)
+    atmospheric_pressure = st.number_input('', format='%d')
 
-st.markdown('</div>', unsafe_allow_html=True)
+with col2:
+    st.markdown('<div class="stSelectbox"><i class="fa fa-cloud icon"></i>' +
+                '<select><option value="0">Clear</option><option value="1">Cloudy</option><option value="2">Overcast</option><option value="3">Partly Cloudy</option></select></div>', unsafe_allow_html=True)
+    cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
+    cloud_cover = st.selectbox('', options=list(cloud_cover_options.keys()))
+    
+    st.markdown('<div class="stSelectbox"><i class="fa fa-calendar icon"></i>' +
+                '<select><option value="0">Autumn</option><option value="1">Spring</option><option value="2">Summer</option><option value="3">Winter</option></select></div>', unsafe_allow_html=True)
+    season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
+    season = st.selectbox('', options=list(season_options.keys()))
+    
+    st.markdown('<div class="stSelectbox"><i class="fa fa-map-marker-alt icon"></i>' +
+                '<select><option value="0">Coastal</option><option value="1">Inland</option><option value="2">Mountain</option></select></div>', unsafe_allow_html=True)
+    location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
+    location = st.selectbox('', options=list(location_options.keys()))
+    
+    st.markdown('<div class="stSelectbox"><i class="fa fa-sun icon"></i>' +
+                '<input type="number" placeholder="UV Index" /></div>', unsafe_allow_html=True)
+    uv_index = st.number_input('', format='%d')
+    
+    st.markdown('<div class="stSelectbox"><i class="fa fa-eye icon"></i>' +
+                '<input type="number" placeholder="Visibility (km)" /></div>', unsafe_allow_html=True)
+    visibility = st.number_input('', format='%d')
 
 # Tombol prediksi
 if st.button('Predict'):
