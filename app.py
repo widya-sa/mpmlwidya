@@ -61,6 +61,13 @@ st.markdown("""
     .stButton>button:hover {
         background-color: #45a049;  /* Warna hijau lebih gelap saat hover */
     }
+    .stButton>button.predict-button {
+        background-color: #f9dcc4;  /* Warna beige untuk tombol predict */
+        color: black;
+    }
+    .stButton>button.predict-button:hover {
+        background-color: #f7b8a3;  /* Warna beige lebih gelap saat hover */
+    }
     .stSelectbox, .stNumberInput, .stTextInput, .stTextArea {
         background: #f9dcc4; /* Background beige */
         color: black;
@@ -136,7 +143,7 @@ with col2:
     st.markdown('</div>', unsafe_allow_html=True)
 
 # Tombol prediksi
-if st.button('Predict'):
+if st.button('Predict', key='predict', help='Click to predict the weather type', className='predict-button'):
     to_predict_list = [
         temperature, humidity, wind_speed, precipitation,
         cloud_cover_options[cloud_cover], atmospheric_pressure, uv_index,
