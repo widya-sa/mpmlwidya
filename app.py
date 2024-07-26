@@ -61,6 +61,7 @@ st.markdown("""
         cursor: pointer;
         border-radius: 12px;
         z-index: 10; /* Memastikan tombol berada di atas latar belakang */
+        width: 100%; /* Lebar penuh tombol */
     }
     .stButton>button:hover {
         background-color: #f4b9a7;  /* Warna beige lebih gelap saat hover */
@@ -74,6 +75,7 @@ st.markdown("""
         margin: 10px 0;
         box-sizing: border-box;
         position: relative;
+        width: 100%; /* Lebar penuh input */
     }
     .input-container {
         display: flex;
@@ -83,6 +85,7 @@ st.markdown("""
         padding: 10px;
         border-radius: 10px;
         border: 1px solid #f4b9a7;
+        width: 100%; /* Lebar penuh input container */
     }
     .input-container i {
         font-size: 20px;
@@ -98,6 +101,7 @@ st.markdown("""
         background: #f9dcc4;
         color: black;
         border: none;
+        width: 100%; /* Lebar penuh input di dalam container */
     }
     .st-container {
         width: 100%; /* Lebar penuh untuk konten */
