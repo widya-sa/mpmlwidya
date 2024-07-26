@@ -31,39 +31,47 @@ def value_predictor(to_predict_list):
 # Menambahkan CSS untuk background dan styling
 st.markdown("""
     <style>
+    body {
+        font-family: 'Arial', sans-serif;
+    }
     .main {
         background-image: url('https://wallpapercave.com/wp/wp12086198.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        padding: 20px;
+        color: #333;
     }
     .stButton>button {
         background-color: #f9dcc4;  /* Warna beige untuk tombol */
         color: black;               /* Warna teks hitam */
         border: none;
-        padding: 10px 20px;
+        padding: 15px 25px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
+        font-size: 18px;
+        margin: 10px 0;
         cursor: pointer;
         border-radius: 12px;
         z-index: 10; /* Memastikan tombol berada di atas latar belakang */
         width: 100%; /* Membuat tombol penuh lebar kolom */
         box-sizing: border-box;
+        transition: background-color 0.3s ease, transform 0.3s ease;
     }
     .stButton>button:hover {
         background-color: #f4b9a7;  /* Warna beige lebih gelap saat hover */
+        transform: scale(1.05); /* Efek zoom saat hover */
     }
     .stSelectbox, .stNumberInput, .stTextInput, .stTextArea {
         background: #f9dcc4; /* Background beige */
         color: black;
         border-radius: 10px;
         border: 2px solid #f4b9a7; /* Border beige lebih gelap */
-        padding: 10px;
+        padding: 12px;
         margin: 10px 0;
         box-sizing: border-box;
+        transition: background-color 0.3s ease;
     }
     .stSelectbox>div, .stNumberInput>div, .stTextInput>div, .stTextArea>div {
         background: #f9dcc4;
@@ -77,6 +85,10 @@ st.markdown("""
     .stColumn {
         flex: 1;
         max-width: calc(50% - 10px);
+        padding: 10px;
+        background-color: rgba(255, 255, 255, 0.8); /* Background putih semi-transparan untuk kolom input */
+        border-radius: 12px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     .prediction-result {
         background-color: #f9dcc4; /* Background beige untuk hasil prediksi */
@@ -84,9 +96,11 @@ st.markdown("""
         border-radius: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         margin-top: 20px;
-        font-size: 18px;
+        font-size: 20px;
+        font-weight: bold;
         text-align: center;
         color: black;
+        border: 2px solid #f4b9a7;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -105,11 +119,11 @@ with st.container():
     col1, col2 = st.columns(2)
     
     with col1:
-        temperature = st.number_input('Temperature (°C)')
-        humidity = st.number_input('Humidity (%)')
-        wind_speed = st.number_input('Wind Speed (km/h)')
-        precipitation = st.number_input('Precipitation (%)')
-        atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)')
+        temperature = st.number_input('Temperature (°C)', format="%.1f")
+        humidity = st.number_input('Humidity (%)', format="%.1f")
+        wind_speed = st.number_input('Wind Speed (km/h)', format="%.1f")
+        precipitation = st.number_input('Precipitation (%)', format="%.1f")
+        atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)', format="%.1f")
     
     with col2:
         cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
@@ -118,8 +132,8 @@ with st.container():
         season = st.selectbox('Season', options=list(season_options.keys()))
         location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
         location = st.selectbox('Location', options=list(location_options.keys()))
-        uv_index = st.number_input('UV Index')
-        visibility = st.number_input('Visibility (km)')
+        uv_index = st.number_input('UV Index', format="%.1f")
+        visibility = st.number_input('Visibility (km)', format="%.1f")
 
 st.markdown('</div>', unsafe_allow_html=True)
 
