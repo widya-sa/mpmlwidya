@@ -79,25 +79,19 @@ st.markdown("""
         color: black;
     }
     .input-container {
-        position: relative;
+        display: flex;
+        align-items: center;
         margin-bottom: 10px;
     }
     .input-container i {
-        position: absolute;
-        left: 10px;
-        top: 50%;
-        transform: translateY(-50%);
         font-size: 20px;
         color: black; /* Warna ikon */
-        z-index: 10;
+        margin-right: 10px;
     }
-    .input-container input, .input-container select {
-        padding-left: 40px; /* Menambahkan ruang untuk ikon */
-        flex: 1;
-        border: 2px solid #f4b9a7;
-        border-radius: 10px;
-        background: #f9dcc4;
-        color: black;
+    .input-label {
+        font-weight: bold;
+        color: black; /* Warna label */
+        margin-right: 10px;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -113,48 +107,48 @@ st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown('<div class="input-container"><i class="fas fa-thermometer-half"></i>', unsafe_allow_html=True)
-    temperature = st.number_input('Temperature (°C)', key='temp')
+    st.markdown('<div class="input-container"><i class="fas fa-thermometer-half"></i><span class="input-label">Temperature (°C)</span>', unsafe_allow_html=True)
+    temperature = st.number_input('', key='temp')
     st.markdown('</div>', unsafe_allow_html=True)
     
-    st.markdown('<div class="input-container"><i class="fas fa-tint"></i>', unsafe_allow_html=True)
-    humidity = st.number_input('Humidity (%)', key='humidity')
+    st.markdown('<div class="input-container"><i class="fas fa-tint"></i><span class="input-label">Humidity (%)</span>', unsafe_allow_html=True)
+    humidity = st.number_input('', key='humidity')
     st.markdown('</div>', unsafe_allow_html=True)
     
-    st.markdown('<div class="input-container"><i class="fas fa-wind"></i>', unsafe_allow_html=True)
-    wind_speed = st.number_input('Wind Speed (km/h)', key='wind_speed')
+    st.markdown('<div class="input-container"><i class="fas fa-wind"></i><span class="input-label">Wind Speed (km/h)</span>', unsafe_allow_html=True)
+    wind_speed = st.number_input('', key='wind_speed')
     st.markdown('</div>', unsafe_allow_html=True)
     
-    st.markdown('<div class="input-container"><i class="fas fa-cloud-showers-heavy"></i>', unsafe_allow_html=True)
-    precipitation = st.number_input('Precipitation (%)', key='precipitation')
+    st.markdown('<div class="input-container"><i class="fas fa-cloud-showers-heavy"></i><span class="input-label">Precipitation (%)</span>', unsafe_allow_html=True)
+    precipitation = st.number_input('', key='precipitation')
     st.markdown('</div>', unsafe_allow_html=True)
     
-    st.markdown('<div class="input-container"><i class="fas fa-gauge"></i>', unsafe_allow_html=True)
-    atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)', key='pressure')
+    st.markdown('<div class="input-container"><i class="fas fa-gauge"></i><span class="input-label">Atmospheric Pressure (hPa)</span>', unsafe_allow_html=True)
+    atmospheric_pressure = st.number_input('', key='pressure')
     st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
-    st.markdown('<div class="input-container"><i class="fas fa-cloud"></i>', unsafe_allow_html=True)
+    st.markdown('<div class="input-container"><i class="fas fa-cloud"></i><span class="input-label">Cloud Cover</span>', unsafe_allow_html=True)
     cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
-    cloud_cover = st.selectbox('Cloud Cover', options=list(cloud_cover_options.keys()), key='cloud_cover')
+    cloud_cover = st.selectbox('', options=list(cloud_cover_options.keys()), key='cloud_cover')
     st.markdown('</div>', unsafe_allow_html=True)
     
-    st.markdown('<div class="input-container"><i class="fas fa-calendar-season"></i>', unsafe_allow_html=True)
+    st.markdown('<div class="input-container"><i class="fas fa-calendar-season"></i><span class="input-label">Season</span>', unsafe_allow_html=True)
     season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
-    season = st.selectbox('Season', options=list(season_options.keys()), key='season')
+    season = st.selectbox('', options=list(season_options.keys()), key='season')
     st.markdown('</div>', unsafe_allow_html=True)
     
-    st.markdown('<div class="input-container"><i class="fas fa-map-marker-alt"></i>', unsafe_allow_html=True)
+    st.markdown('<div class="input-container"><i class="fas fa-map-marker-alt"></i><span class="input-label">Location</span>', unsafe_allow_html=True)
     location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
-    location = st.selectbox('Location', options=list(location_options.keys()), key='location')
+    location = st.selectbox('', options=list(location_options.keys()), key='location')
     st.markdown('</div>', unsafe_allow_html=True)
     
-    st.markdown('<div class="input-container"><i class="fas fa-sun"></i>', unsafe_allow_html=True)
-    uv_index = st.number_input('UV Index', key='uv_index')
+    st.markdown('<div class="input-container"><i class="fas fa-sun"></i><span class="input-label">UV Index</span>', unsafe_allow_html=True)
+    uv_index = st.number_input('', key='uv_index')
     st.markdown('</div>', unsafe_allow_html=True)
     
-    st.markdown('<div class="input-container"><i class="fas fa-eye"></i>', unsafe_allow_html=True)
-    visibility = st.number_input('Visibility (km)', key='visibility')
+    st.markdown('<div class="input-container"><i class="fas fa-eye"></i><span class="input-label">Visibility (km)</span>', unsafe_allow_html=True)
+    visibility = st.number_input('', key='visibility')
     st.markdown('</div>', unsafe_allow_html=True)
 
 # Tombol prediksi
