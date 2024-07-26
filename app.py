@@ -5,7 +5,7 @@ import numpy as np
 # Fungsi untuk memuat model dan melakukan prediksi
 def value_predictor(to_predict_list):
     to_predict = np.array(to_predict_list).reshape(1, -1)  # Membentuk array 2D dengan 1 baris dan 10 kolom
-    with open('model.pkl', 'rb') as file:
+    with open('model.pkl', 'wb') as file:
         loaded_model = joblib.load(file)
     result = loaded_model.predict(to_predict)[0]  # Ambil hasil prediksi
     weather_mapping = {
@@ -25,11 +25,11 @@ col1, col2 = st.columns(2)
 
 with col1:
     st.subheader("Data Cuaca")
-    temperature = st.number_input('Temperature (°C)', min_value=0.0, format="%.2f")
-    humidity = st.number_input('Humidity (%)', min_value=0.0, format="%.2f")
-    wind_speed = st.number_input('Wind Speed (km/h)', min_value=0.0, format="%.2f")
-    precipitation = st.number_input('Precipitation (%)', min_value=0.0, format="%.2f")
-    atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)', min_value=0.0, format="%.2f")
+    temperature = st.number_input('Temperature (°C)')
+    humidity = st.number_input('Humidity (%)')
+    wind_speed = st.number_input('Wind Speed (km/h)')
+    precipitation = st.number_input('Precipitation (%)')
+    atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)')
 
 with col2:
     st.subheader("Kondisi Cuaca")
@@ -50,8 +50,8 @@ with col2:
         'Inland': 1,
         'Mountain': 2
     })
-    uv_index = st.number_input('UV Index', min_value=0.0, format="%.2f")
-    visibility = st.number_input('Visibility (km)', min_value=0.0, format="%.2f")
+    uv_index = st.number_input('UV Index')
+    visibility = st.number_input('Visibility (km)')
 
 # Tombol prediksi
 st.markdown("---")
