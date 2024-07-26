@@ -31,6 +31,8 @@ def value_predictor(to_predict_list):
 # Menambahkan CSS untuk background dan styling
 st.markdown("""
     <style>
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+    
     body {
         font-family: 'Arial', sans-serif;
     }
@@ -102,6 +104,16 @@ st.markdown("""
         color: black;
         border: 2px solid #f4b9a7;
     }
+    .input-label {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+    }
+    .input-label i {
+        margin-right: 10px;
+        font-size: 20px;
+        color: #f4b9a7;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -119,21 +131,39 @@ with st.container():
     col1, col2 = st.columns(2)
     
     with col1:
-        temperature = st.number_input('Temperature (°C)', format="%.1f")
-        humidity = st.number_input('Humidity (%)', format="%.1f")
-        wind_speed = st.number_input('Wind Speed (km/h)', format="%.1f")
-        precipitation = st.number_input('Precipitation (%)', format="%.1f")
-        atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)', format="%.1f")
+        st.markdown('<div class="input-label"><i class="fas fa-temperature-high"></i> Temperature (°C)</div>', unsafe_allow_html=True)
+        temperature = st.number_input('', format="%.1f")
+        
+        st.markdown('<div class="input-label"><i class="fas fa-tachometer-alt"></i> Humidity (%)</div>', unsafe_allow_html=True)
+        humidity = st.number_input('', format="%.1f")
+        
+        st.markdown('<div class="input-label"><i class="fas fa-wind"></i> Wind Speed (km/h)</div>', unsafe_allow_html=True)
+        wind_speed = st.number_input('', format="%.1f")
+        
+        st.markdown('<div class="input-label"><i class="fas fa-cloud-showers-heavy"></i> Precipitation (%)</div>', unsafe_allow_html=True)
+        precipitation = st.number_input('', format="%.1f")
+        
+        st.markdown('<div class="input-label"><i class="fas fa-cloud"></i> Atmospheric Pressure (hPa)</div>', unsafe_allow_html=True)
+        atmospheric_pressure = st.number_input('', format="%.1f")
     
     with col2:
+        st.markdown('<div class="input-label"><i class="fas fa-cloud-sun"></i> Cloud Cover</div>', unsafe_allow_html=True)
         cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
-        cloud_cover = st.selectbox('Cloud Cover', options=list(cloud_cover_options.keys()))
+        cloud_cover = st.selectbox('', options=list(cloud_cover_options.keys()))
+        
+        st.markdown('<div class="input-label"><i class="fas fa-calendar-season"></i> Season</div>', unsafe_allow_html=True)
         season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
-        season = st.selectbox('Season', options=list(season_options.keys()))
+        season = st.selectbox('', options=list(season_options.keys()))
+        
+        st.markdown('<div class="input-label"><i class="fas fa-map-marker-alt"></i> Location</div>', unsafe_allow_html=True)
         location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
-        location = st.selectbox('Location', options=list(location_options.keys()))
-        uv_index = st.number_input('UV Index', format="%.1f")
-        visibility = st.number_input('Visibility (km)', format="%.1f")
+        location = st.selectbox('', options=list(location_options.keys()))
+        
+        st.markdown('<div class="input-label"><i class="fas fa-sun"></i> UV Index</div>', unsafe_allow_html=True)
+        uv_index = st.number_input('', format="%.1f")
+        
+        st.markdown('<div class="input-label"><i class="fas fa-eye"></i> Visibility (km)</div>', unsafe_allow_html=True)
+        visibility = st.number_input('', format="%.1f")
 
 st.markdown('</div>', unsafe_allow_html=True)
 
