@@ -74,7 +74,7 @@ st.markdown("""
 st.title("Weather Prediction")
 st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
-# Membagi input form menjadi dua kolom
+# Membagi input form menjadi dua kolom dengan 5 input di masing-masing kolom
 col1, col2 = st.columns(2)
 
 with col1:
@@ -83,7 +83,6 @@ with col1:
     wind_speed = st.number_input('Wind Speed (km/h)')
     precipitation = st.number_input('Precipitation (%)')
     atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)')
-    uv_index = st.number_input('UV Index')
 
 with col2:
     cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
@@ -92,6 +91,7 @@ with col2:
     season = st.selectbox('Season', options=list(season_options.keys()))
     location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
     location = st.selectbox('Location', options=list(location_options.keys()))
+    uv_index = st.number_input('UV Index')
     visibility = st.number_input('Visibility (km)')
 
 # Tombol prediksi
