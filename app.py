@@ -41,26 +41,20 @@ st.markdown("""
         color: white;
         height: 100vh; /* Memastikan tinggi sesuai dengan viewport */
         overflow: auto;
-        position: relative;
-        padding: 0; /* Menghilangkan padding untuk memastikan konten penuh */
         margin: 0; /* Menghilangkan margin untuk tampilan penuh */
-    }
-    .sidebar .sidebar-content {
-        background-color: rgba(255, 255, 255, 0.8);
     }
     .stButton>button {
         background-color: #f9dcc4;  /* Warna beige untuk tombol */
         color: black;
         border: none;
-        padding: 10px 20px;
+        padding: 15px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
+        font-size: 18px;
+        margin: 10px 0;
         cursor: pointer;
         border-radius: 12px;
-        z-index: 10; /* Memastikan tombol berada di atas latar belakang */
         width: 100%; /* Lebar penuh tombol */
     }
     .stButton>button:hover {
@@ -74,7 +68,6 @@ st.markdown("""
         padding: 10px;
         margin: 10px 0;
         box-sizing: border-box;
-        position: relative;
         width: 100%; /* Lebar penuh input */
     }
     .input-container {
@@ -107,6 +100,16 @@ st.markdown("""
         width: 100%; /* Lebar penuh untuk konten */
         max-width: 100%; /* Menghindari pembatasan lebar */
     }
+    .stColumns {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+    .stColumn {
+        flex: 1;
+        min-width: 0;
+        max-width: 100%;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -119,7 +122,7 @@ st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
 # Membagi input form menjadi dua baris dengan 5 input di setiap baris
 def create_input_row(inputs):
-    cols = st.columns(5)
+    cols = st.columns(len(inputs))
     for i, input_item in enumerate(inputs):
         with cols[i]:
             st.markdown(f'<div class="input-container"><i class="fas {input_item[1]}"></i><span class="input-label">{input_item[0]}</span>', unsafe_allow_html=True)
