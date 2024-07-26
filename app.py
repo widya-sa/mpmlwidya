@@ -28,11 +28,9 @@ def value_predictor(to_predict_list):
     except Exception as e:
         raise RuntimeError(f"Failed to predict weather: {e}")
 
-# Menambahkan CSS untuk background, styling, dan ikon
+# Menambahkan CSS untuk background dan styling
 st.markdown("""
     <style>
-    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
-    
     .main {
         background-image: url('https://wallpapercave.com/wp/wp12086198.jpg');
         background-size: cover;
@@ -41,11 +39,15 @@ st.markdown("""
         color: white;
         height: 100vh; /* Memastikan tinggi sesuai dengan viewport */
         overflow: auto;
-        padding: 20px; /* Menambahkan padding agar konten tidak menempel pada tepi */
+        position: relative;
+        padding: 20px; /* Menambahkan padding untuk ruang di sekeliling konten */
+    }
+    .sidebar .sidebar-content {
+        background-color: rgba(255, 255, 255, 0.8);
     }
     .stButton>button {
-        background-color: #4CAF50;  /* Warna hijau untuk tombol */
-        color: white;
+        background-color: #f9dcc4;  /* Warna beige untuk tombol */
+        color: black;
         border: none;
         padding: 10px 20px;
         text-align: center;
@@ -56,16 +58,8 @@ st.markdown("""
         cursor: pointer;
         border-radius: 12px;
         z-index: 10; /* Memastikan tombol berada di atas latar belakang */
-        width: 100%; /* Lebar penuh tombol */
     }
     .stButton>button:hover {
-        background-color: #45a049;  /* Warna hijau lebih gelap saat hover */
-    }
-    .stButton>button.predict-button {
-        background-color: #f9dcc4;  /* Warna beige untuk tombol Predict */
-        color: black;
-    }
-    .stButton>button.predict-button:hover {
         background-color: #f4b9a7;  /* Warna beige lebih gelap saat hover */
     }
     .stSelectbox, .stNumberInput, .stTextInput, .stTextArea {
@@ -76,37 +70,10 @@ st.markdown("""
         padding: 10px;
         margin: 10px 0;
         box-sizing: border-box;
-        width: 100%; /* Lebar penuh input */
     }
-    .input-container {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
+    .stSelectbox>div, .stNumberInput>div, .stTextInput>div, .stTextArea>div {
         background: #f9dcc4;
-        padding: 10px;
-        border-radius: 10px;
-        border: 1px solid #f4b9a7;
-        width: 100%; /* Lebar penuh input container */
-    }
-    .input-container i {
-        font-size: 20px;
-        color: black; /* Warna ikon */
-        margin-right: 10px;
-    }
-    .input-label {
-        font-weight: bold;
-        color: black; /* Warna label */
-        margin-right: 10px;
-    }
-    .input-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        margin-bottom: 20px;
-    }
-    .input-col {
-        flex: 1;
-        max-width: calc(50% - 10px); /* Lebar kolom 50% dari container */
+        color: black;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -122,16 +89,13 @@ st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown('<div class="input-row">', unsafe_allow_html=True)
     temperature = st.number_input('Temperature (°C)')
     humidity = st.number_input('Humidity (%)')
     wind_speed = st.number_input('Wind Speed (km/h)')
     precipitation = st.number_input('Precipitation (%)')
     atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)')
-    st.markdown('</div>', unsafe_allow_html=True)
 
 with col2:
-    st.markdown('<div class="input-row">', unsafe_allow_html=True)
     cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
     cloud_cover = st.selectbox('Cloud Cover', options=list(cloud_cover_options.keys()))
     season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
@@ -140,10 +104,9 @@ with col2:
     location = st.selectbox('Location', options=list(location_options.keys()))
     uv_index = st.number_input('UV Index')
     visibility = st.number_input('Visibility (km)')
-    st.markdown('</div>', unsafe_allow_html=True)
 
-# Tombol prediksi dengan kelas khusus
-if st.button('Predict', key='predict', help='Klik untuk memprediksi jenis cuaca', use_container_width=True):
+# Tombol prediksi
+if st.button('Predict'):
     to_predict_list = [
         temperature, humidity, wind_speed, precipitation,
         cloud_cover_options[cloud_cover], atmospheric_pressure, uv_index,
