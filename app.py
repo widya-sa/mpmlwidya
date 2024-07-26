@@ -68,26 +68,15 @@ humidity = st.number_input('Humidity (%)')
 wind_speed = st.number_input('Wind Speed (km/h)')
 precipitation = st.number_input('Precipitation (%)')
 
-cloud_cover = st.selectbox('Cloud Cover', options={
-    'Clear': 0,
-    'Cloudy': 1,
-    'Overcast': 2,
-    'Partly Cloudy': 3
-})
+cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
+cloud_cover = st.selectbox('Cloud Cover', options=list(cloud_cover_options.keys()))
 
 atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)')
-season = st.selectbox('Season', options={
-    'Autumn': 0,
-    'Spring': 1,
-    'Summer': 2,
-    'Winter': 3
-})
+season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
+season = st.selectbox('Season', options=list(season_options.keys()))
 
-location = st.selectbox('Location', options={
-    'Coastal': 0,
-    'Inland': 1,
-    'Mountain': 2
-})
+location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
+location = st.selectbox('Location', options=list(location_options.keys()))
 
 uv_index = st.number_input('UV Index')
 visibility = st.number_input('Visibility (km)')
@@ -96,8 +85,8 @@ visibility = st.number_input('Visibility (km)')
 if st.button('Predict'):
     to_predict_list = [
         temperature, humidity, wind_speed, precipitation,
-        int(cloud_cover), atmospheric_pressure, uv_index, int(season),
-        visibility, int(location)
+        cloud_cover_options[cloud_cover], atmospheric_pressure, uv_index,
+        season_options[season], visibility, location_options[location]
     ]
     
     try:
