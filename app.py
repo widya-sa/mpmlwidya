@@ -32,7 +32,7 @@ def value_predictor(to_predict_list):
 st.markdown("""
     <style>
     .reportview-container {
-        background: url('https://c0.wallpaperflare.com/preview/422/419/577/purple-beach-sunset-new-zealand.jpg');
+        background: url('beach.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
