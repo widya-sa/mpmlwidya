@@ -28,14 +28,15 @@ def value_predictor(to_predict_list):
     except Exception as e:
         raise RuntimeError(f"Failed to predict weather: {e}")
 
-# Menambahkan CSS untuk background
+# Menambahkan CSS untuk background dan styling
 st.markdown("""
     <style>
     .reportview-container {
-        background: url('https://example.com/your-weather-background.jpg');
+        background: url('https://c0.wallpaperflare.com/preview/422/419/577/purple-beach-sunset-new-zealand.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        color: white;
     }
     .sidebar .sidebar-content {
         background-color: rgba(255, 255, 255, 0.8);
@@ -51,9 +52,20 @@ st.markdown("""
         font-size: 16px;
         margin: 4px 2px;
         cursor: pointer;
+        border-radius: 12px;
     }
     .stButton>button:hover {
         background-color: #45a049;
+    }
+    .stSelectbox, .stNumberInput {
+        background: rgba(255, 255, 255, 0.8);
+        color: black;
+        border-radius: 10px;
+    }
+    .stTextInput, .stTextArea {
+        background: rgba(255, 255, 255, 0.8);
+        color: black;
+        border-radius: 10px;
     }
     </style>
 """, unsafe_allow_html=True)
