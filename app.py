@@ -36,9 +36,9 @@ st.markdown("""
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        padding: 20px;
-        color: white;
-        min-height: 100vh;
+    }
+    .sidebar .sidebar-content {
+        background-color: rgba(255, 255, 255, 0.8);
     }
     .stButton>button {
         background-color: #f9dcc4;  /* Warna beige untuk tombol */
@@ -53,8 +53,6 @@ st.markdown("""
         cursor: pointer;
         border-radius: 12px;
         z-index: 10; /* Memastikan tombol berada di atas latar belakang */
-        width: 100%; /* Membuat tombol penuh lebar kolom */
-        box-sizing: border-box;
     }
     .stButton>button:hover {
         background-color: #f4b9a7;  /* Warna beige lebih gelap saat hover */
@@ -67,28 +65,10 @@ st.markdown("""
         padding: 10px;
         margin: 10px 0;
         box-sizing: border-box;
-        display: flex;
-        align-items: center;
     }
     .stSelectbox>div, .stNumberInput>div, .stTextInput>div, .stTextArea>div {
         background: #f9dcc4;
         color: black;
-        display: flex;
-        align-items: center;
-    }
-    .icon {
-        margin-right: 10px;
-        font-size: 20px; /* Ukuran ikon */
-        color: black; /* Warna ikon */
-    }
-    .title {
-        display: flex;
-        align-items: center;
-        gap: 10px; /* Spasi antara ikon dan teks */
-    }
-    .fa-sun {
-        color: black; /* Warna ikon matahari hitam */
-        font-size: 24px; /* Ukuran ikon */
     }
     </style>
 """, unsafe_allow_html=True)
@@ -97,56 +77,28 @@ st.markdown("""
 st.markdown('<div class="main">', unsafe_allow_html=True)
 
 # Antarmuka pengguna Streamlit
-st.markdown('<div class="title"><i class="fa fa-sun"></i><h1>Weather Prediction</h1></div>', unsafe_allow_html=True)
+st.title("Weather Prediction")
 st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
 # Membagi input form menjadi dua kolom dengan 5 input di masing-masing kolom
 col1, col2 = st.columns(2)
 
 with col1:
-    st.markdown('<div class="stSelectbox"><i class="fa fa-thermometer-half icon"></i>' +
-                '<input type="number" placeholder="Temperature (°C)" /></div>', unsafe_allow_html=True)
-    temperature = st.number_input('', format='%d')
-    
-    st.markdown('<div class="stSelectbox"><i class="fa fa-tint icon"></i>' +
-                '<input type="number" placeholder="Humidity (%)" /></div>', unsafe_allow_html=True)
-    humidity = st.number_input('', format='%d')
-    
-    st.markdown('<div class="stSelectbox"><i class="fa fa-wind icon"></i>' +
-                '<input type="number" placeholder="Wind Speed (km/h)" /></div>', unsafe_allow_html=True)
-    wind_speed = st.number_input('', format='%d')
-    
-    st.markdown('<div class="stSelectbox"><i class="fa fa-cloud-rain icon"></i>' +
-                '<input type="number" placeholder="Precipitation (%)" /></div>', unsafe_allow_html=True)
-    precipitation = st.number_input('', format='%d')
-    
-    st.markdown('<div class="stSelectbox"><i class="fa fa-cloud icon"></i>' +
-                '<input type="number" placeholder="Atmospheric Pressure (hPa)" /></div>', unsafe_allow_html=True)
-    atmospheric_pressure = st.number_input('', format='%d')
+    temperature = st.number_input('Temperature (°C)')
+    humidity = st.number_input('Humidity (%)')
+    wind_speed = st.number_input('Wind Speed (km/h)')
+    precipitation = st.number_input('Precipitation (%)')
+    atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)')
 
 with col2:
-    st.markdown('<div class="stSelectbox"><i class="fa fa-cloud icon"></i>' +
-                '<select><option value="0">Clear</option><option value="1">Cloudy</option><option value="2">Overcast</option><option value="3">Partly Cloudy</option></select></div>', unsafe_allow_html=True)
     cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
-    cloud_cover = st.selectbox('', options=list(cloud_cover_options.keys()))
-    
-    st.markdown('<div class="stSelectbox"><i class="fa fa-calendar icon"></i>' +
-                '<select><option value="0">Autumn</option><option value="1">Spring</option><option value="2">Summer</option><option value="3">Winter</option></select></div>', unsafe_allow_html=True)
+    cloud_cover = st.selectbox('Cloud Cover', options=list(cloud_cover_options.keys()))
     season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
-    season = st.selectbox('', options=list(season_options.keys()))
-    
-    st.markdown('<div class="stSelectbox"><i class="fa fa-map-marker-alt icon"></i>' +
-                '<select><option value="0">Coastal</option><option value="1">Inland</option><option value="2">Mountain</option></select></div>', unsafe_allow_html=True)
+    season = st.selectbox('Season', options=list(season_options.keys()))
     location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
-    location = st.selectbox('', options=list(location_options.keys()))
-    
-    st.markdown('<div class="stSelectbox"><i class="fa fa-sun icon"></i>' +
-                '<input type="number" placeholder="UV Index" /></div>', unsafe_allow_html=True)
-    uv_index = st.number_input('', format='%d')
-    
-    st.markdown('<div class="stSelectbox"><i class="fa fa-eye icon"></i>' +
-                '<input type="number" placeholder="Visibility (km)" /></div>', unsafe_allow_html=True)
-    visibility = st.number_input('', format='%d')
+    location = st.selectbox('Location', options=list(location_options.keys()))
+    uv_index = st.number_input('UV Index')
+    visibility = st.number_input('Visibility (km)')
 
 # Tombol prediksi
 if st.button('Predict'):
