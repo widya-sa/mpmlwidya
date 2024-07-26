@@ -33,13 +33,11 @@ preprocessor = ColumnTransformer(
 
 # Define SMOTE and ENN
 smote = SMOTE(random_state=47)
-enn = EditedNearestNeighbours()
 
 # Create an imbalanced-learn pipeline
 pipeline = imPipeline([
     ('preprocessor', preprocessor),
     ('smote', smote),
-    ('enn', enn),
     ('classifier', RandomForestClassifier(n_estimators=100, max_depth=None, min_samples_split=2, min_samples_leaf=1, bootstrap=True, random_state=47))
 ])
 
