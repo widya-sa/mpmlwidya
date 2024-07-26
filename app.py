@@ -82,6 +82,10 @@ st.markdown("""
         display: flex;
         align-items: center;
         margin-bottom: 10px;
+        background: #f9dcc4;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #f4b9a7;
     }
     .input-container i {
         font-size: 20px;
@@ -93,6 +97,11 @@ st.markdown("""
         color: black; /* Warna label */
         margin-right: 10px;
     }
+    .stNumberInput input, .stSelectbox select, .stTextInput input, .stTextArea textarea {
+        background: #f9dcc4;
+        color: black;
+        border: none;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -103,60 +112,55 @@ st.markdown('<div class="main">', unsafe_allow_html=True)
 st.title("Weather Prediction")
 st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
-# Membagi input form menjadi dua kolom dengan 5 input di masing-masing kolom
-col1, col2 = st.columns(2)
+# Membagi input form menjadi baris dengan 3 input di setiap baris
+def create_input_row(inputs):
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.markdown(f'<div class="input-container"><i class="fas {inputs[0][1]}"></i><span class="input-label">{inputs[0][0]}</span>', unsafe_allow_html=True)
+        st.number_input('', key=inputs[0][2])
+        st.markdown('</div>', unsafe_allow_html=True)
+    with col2:
+        st.markdown(f'<div class="input-container"><i class="fas {inputs[1][1]}"></i><span class="input-label">{inputs[1][0]}</span>', unsafe_allow_html=True)
+        st.number_input('', key=inputs[1][2])
+        st.markdown('</div>', unsafe_allow_html=True)
+    with col3:
+        st.markdown(f'<div class="input-container"><i class="fas {inputs[2][1]}"></i><span class="input-label">{inputs[2][0]}</span>', unsafe_allow_html=True)
+        st.number_input('', key=inputs[2][2])
+        st.markdown('</div>', unsafe_allow_html=True)
 
-with col1:
-    st.markdown('<div class="input-container"><i class="fas fa-thermometer-half"></i><span class="input-label">Temperature (°C)</span>', unsafe_allow_html=True)
-    temperature = st.number_input('', key='temp')
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.markdown('<div class="input-container"><i class="fas fa-tint"></i><span class="input-label">Humidity (%)</span>', unsafe_allow_html=True)
-    humidity = st.number_input('', key='humidity')
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.markdown('<div class="input-container"><i class="fas fa-wind"></i><span class="input-label">Wind Speed (km/h)</span>', unsafe_allow_html=True)
-    wind_speed = st.number_input('', key='wind_speed')
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.markdown('<div class="input-container"><i class="fas fa-cloud-showers-heavy"></i><span class="input-label">Precipitation (%)</span>', unsafe_allow_html=True)
-    precipitation = st.number_input('', key='precipitation')
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.markdown('<div class="input-container"><i class="fas fa-gauge"></i><span class="input-label">Atmospheric Pressure (hPa)</span>', unsafe_allow_html=True)
-    atmospheric_pressure = st.number_input('', key='pressure')
-    st.markdown('</div>', unsafe_allow_html=True)
+# Definisi input
+inputs_row1 = [
+    ('Temperature (°C)', 'fa-thermometer-half', 'temp'),
+    ('Humidity (%)', 'fa-tint', 'humidity'),
+    ('Wind Speed (km/h)', 'fa-wind', 'wind_speed')
+]
+inputs_row2 = [
+    ('Precipitation (%)', 'fa-cloud-showers-heavy', 'precipitation'),
+    ('Atmospheric Pressure (hPa)', 'fa-gauge', 'pressure'),
+    ('UV Index', 'fa-sun', 'uv_index')
+]
+inputs_row3 = [
+    ('Cloud Cover', 'fa-cloud', 'cloud_cover'),
+    ('Season', 'fa-calendar-season', 'season'),
+    ('Location', 'fa-map-marker-alt', 'location')
+]
+inputs_row4 = [
+    ('Visibility (km)', 'fa-eye', 'visibility')
+]
 
-with col2:
-    st.markdown('<div class="input-container"><i class="fas fa-cloud"></i><span class="input-label">Cloud Cover</span>', unsafe_allow_html=True)
-    cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
-    cloud_cover = st.selectbox('', options=list(cloud_cover_options.keys()), key='cloud_cover')
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.markdown('<div class="input-container"><i class="fas fa-calendar-season"></i><span class="input-label">Season</span>', unsafe_allow_html=True)
-    season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
-    season = st.selectbox('', options=list(season_options.keys()), key='season')
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.markdown('<div class="input-container"><i class="fas fa-map-marker-alt"></i><span class="input-label">Location</span>', unsafe_allow_html=True)
-    location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
-    location = st.selectbox('', options=list(location_options.keys()), key='location')
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.markdown('<div class="input-container"><i class="fas fa-sun"></i><span class="input-label">UV Index</span>', unsafe_allow_html=True)
-    uv_index = st.number_input('', key='uv_index')
-    st.markdown('</div>', unsafe_allow_html=True)
-    
-    st.markdown('<div class="input-container"><i class="fas fa-eye"></i><span class="input-label">Visibility (km)</span>', unsafe_allow_html=True)
-    visibility = st.number_input('', key='visibility')
-    st.markdown('</div>', unsafe_allow_html=True)
+# Menampilkan input dalam baris
+create_input_row(inputs_row1)
+create_input_row(inputs_row2)
+create_input_row(inputs_row3)
+create_input_row(inputs_row4)
 
 # Tombol prediksi
 if st.button('Predict'):
     to_predict_list = [
-        temperature, humidity, wind_speed, precipitation,
-        cloud_cover_options[cloud_cover], atmospheric_pressure, uv_index,
-        season_options[season], visibility, location_options[location]
+        st.session_state.temp, st.session_state.humidity, st.session_state.wind_speed,
+        st.session_state.precipitation, st.session_state.pressure, st.session_state.uv_index,
+        st.session_state.cloud_cover, st.session_state.season, st.session_state.visibility,
+        st.session_state.location
     ]
     
     try:
