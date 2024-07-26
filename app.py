@@ -110,6 +110,9 @@ st.markdown("""
         min-width: 0;
         max-width: 100%;
     }
+    .black-text {
+        color: black;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -118,7 +121,7 @@ st.markdown('<div class="main">', unsafe_allow_html=True)
 
 # Antarmuka pengguna Streamlit
 st.title("Weather Prediction")
-st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
+st.markdown('<p class="black-text">Masukkan data cuaca untuk memprediksi jenis cuaca.</p>', unsafe_allow_html=True)
 
 # Membagi input form menjadi dua kolom per baris
 def create_input_row(inputs):
