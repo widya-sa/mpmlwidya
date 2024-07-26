@@ -112,47 +112,37 @@ st.markdown('<div class="main">', unsafe_allow_html=True)
 st.title("Weather Prediction")
 st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
-# Membagi input form menjadi baris dengan 3 input di setiap baris
+# Membagi input form menjadi dua baris dengan 5 input di setiap baris
 def create_input_row(inputs):
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        st.markdown(f'<div class="input-container"><i class="fas {inputs[0][1]}"></i><span class="input-label">{inputs[0][0]}</span>', unsafe_allow_html=True)
-        st.number_input('', key=inputs[0][2])
-        st.markdown('</div>', unsafe_allow_html=True)
-    with col2:
-        st.markdown(f'<div class="input-container"><i class="fas {inputs[1][1]}"></i><span class="input-label">{inputs[1][0]}</span>', unsafe_allow_html=True)
-        st.number_input('', key=inputs[1][2])
-        st.markdown('</div>', unsafe_allow_html=True)
-    with col3:
-        st.markdown(f'<div class="input-container"><i class="fas {inputs[2][1]}"></i><span class="input-label">{inputs[2][0]}</span>', unsafe_allow_html=True)
-        st.number_input('', key=inputs[2][2])
-        st.markdown('</div>', unsafe_allow_html=True)
+    col1, col2, col3, col4, col5 = st.columns(5)
+    for i, input_item in enumerate(inputs):
+        with [col1, col2, col3, col4, col5][i]:
+            st.markdown(f'<div class="input-container"><i class="fas {input_item[1]}"></i><span class="input-label">{input_item[0]}</span>', unsafe_allow_html=True)
+            if input_item[0] == 'Cloud Cover' or input_item[0] == 'Season' or input_item[0] == 'Location':
+                st.selectbox('', options=input_item[2], key=input_item[3])
+            else:
+                st.number_input('', key=input_item[3])
+            st.markdown('</div>', unsafe_allow_html=True)
 
-# Definisi input
+# Definisi input untuk baris pertama dan kedua
 inputs_row1 = [
-    ('Temperature (°C)', 'fa-thermometer-half', 'temp'),
-    ('Humidity (%)', 'fa-tint', 'humidity'),
-    ('Wind Speed (km/h)', 'fa-wind', 'wind_speed')
+    ('Temperature (°C)', 'fa-thermometer-half', None, 'temp'),
+    ('Humidity (%)', 'fa-tint', None, 'humidity'),
+    ('Wind Speed (km/h)', 'fa-wind', None, 'wind_speed'),
+    ('Precipitation (%)', 'fa-cloud-showers-heavy', None, 'precipitation'),
+    ('Atmospheric Pressure (hPa)', 'fa-gauge', None, 'pressure')
 ]
 inputs_row2 = [
-    ('Precipitation (%)', 'fa-cloud-showers-heavy', 'precipitation'),
-    ('Atmospheric Pressure (hPa)', 'fa-gauge', 'pressure'),
-    ('UV Index', 'fa-sun', 'uv_index')
-]
-inputs_row3 = [
-    ('Cloud Cover', 'fa-cloud', 'cloud_cover'),
-    ('Season', 'fa-calendar-season', 'season'),
-    ('Location', 'fa-map-marker-alt', 'location')
-]
-inputs_row4 = [
-    ('Visibility (km)', 'fa-eye', 'visibility')
+    ('Cloud Cover', 'fa-cloud', {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}, 'cloud_cover'),
+    ('Season', 'fa-calendar-season', {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}, 'season'),
+    ('Location', 'fa-map-marker-alt', {'Coastal': 0, 'Inland': 1, 'Mountain': 2}, 'location'),
+    ('UV Index', 'fa-sun', None, 'uv_index'),
+    ('Visibility (km)', 'fa-eye', None, 'visibility')
 ]
 
 # Menampilkan input dalam baris
 create_input_row(inputs_row1)
 create_input_row(inputs_row2)
-create_input_row(inputs_row3)
-create_input_row(inputs_row4)
 
 # Tombol prediksi
 if st.button('Predict'):
