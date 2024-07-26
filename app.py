@@ -38,10 +38,6 @@ st.markdown("""
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        color: white;
-        height: 100vh; /* Memastikan tinggi sesuai dengan viewport */
-        overflow: auto;
-        margin: 0; /* Menghilangkan margin untuk tampilan penuh */
     }
     .stButton>button {
         background-color: #f9dcc4;  /* Warna beige untuk tombol */
