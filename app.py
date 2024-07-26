@@ -32,13 +32,15 @@ def value_predictor(to_predict_list):
 st.markdown("""
     <style>
     .main {
-        background-image: url('https://i.pinimg.com/736x/c2/47/b3/c247b3049ed035a022785257f87b1eb2.jpg');
+        background-image: url('https://i.pinimg.com/originals/77/c3/ea/77c3ea242a495a7b31c4374997b11d51.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
         color: white;
         height: 100vh; /* Memastikan tinggi sesuai dengan viewport */
-        overflow: hidden;
+        overflow: auto;
+        position: relative;
+        padding: 20px; /* Menambahkan padding untuk ruang di sekeliling konten */
     }
     .sidebar .sidebar-content {
         background-color: rgba(255, 255, 255, 0.8);
@@ -55,6 +57,7 @@ st.markdown("""
         margin: 4px 2px;
         cursor: pointer;
         border-radius: 12px;
+        z-index: 10; /* Memastikan tombol berada di atas latar belakang */
     }
     .stButton>button:hover {
         background-color: #45a049;  /* Warna hijau lebih gelap saat hover */
