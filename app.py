@@ -31,11 +31,14 @@ def value_predictor(to_predict_list):
 # Menambahkan CSS untuk background dan styling
 st.markdown("""
     <style>
-    .reportview-container {
-        background-image: url('https://i.pinimg.com/736x/c2/47/b3/c247b3049ed035a022785257f87b1eb2.jpg');
+    .main {
+        background-image: url('https://i.pinimg.com/originals/77/c3/ea/77c3ea242a495a7b31c4374997b11d51.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        color: white;
+        height: 100vh; /* Memastikan tinggi sesuai dengan viewport */
+        overflow: hidden;
     }
     .sidebar .sidebar-content {
         background-color: rgba(255, 255, 255, 0.8);
@@ -68,6 +71,9 @@ st.markdown("""
     }
     </style>
 """, unsafe_allow_html=True)
+
+# Mengatur elemen utama di dalam div dengan kelas 'main'
+st.markdown('<div class="main">', unsafe_allow_html=True)
 
 # Antarmuka pengguna Streamlit
 st.title("Weather Prediction")
@@ -106,3 +112,6 @@ if st.button('Predict'):
         st.success(f"Predicted Weather Type: {result}")
     except RuntimeError as e:
         st.error(f"An error occurred: {str(e)}")
+
+# Menutup div dengan kelas 'main'
+st.markdown('</div>', unsafe_allow_html=True)
