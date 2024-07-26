@@ -42,7 +42,8 @@ st.markdown("""
         height: 100vh; /* Memastikan tinggi sesuai dengan viewport */
         overflow: auto;
         position: relative;
-        padding: 20px; /* Menambahkan padding untuk ruang di sekeliling konten */
+        padding: 0; /* Menghilangkan padding untuk memastikan konten penuh */
+        margin: 0; /* Menghilangkan margin untuk tampilan penuh */
     }
     .sidebar .sidebar-content {
         background-color: rgba(255, 255, 255, 0.8);
@@ -74,10 +75,6 @@ st.markdown("""
         box-sizing: border-box;
         position: relative;
     }
-    .stSelectbox>div, .stNumberInput>div, .stTextInput>div, .stTextArea>div {
-        background: #f9dcc4;
-        color: black;
-    }
     .input-container {
         display: flex;
         align-items: center;
@@ -102,6 +99,10 @@ st.markdown("""
         color: black;
         border: none;
     }
+    .st-container {
+        width: 100%; /* Lebar penuh untuk konten */
+        max-width: 100%; /* Menghindari pembatasan lebar */
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -114,9 +115,9 @@ st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
 # Membagi input form menjadi dua baris dengan 5 input di setiap baris
 def create_input_row(inputs):
-    col1, col2, col3, col4, col5 = st.columns(5)
+    cols = st.columns(5)
     for i, input_item in enumerate(inputs):
-        with [col1, col2, col3, col4, col5][i]:
+        with cols[i]:
             st.markdown(f'<div class="input-container"><i class="fas {input_item[1]}"></i><span class="input-label">{input_item[0]}</span>', unsafe_allow_html=True)
             if input_item[0] == 'Cloud Cover' or input_item[0] == 'Season' or input_item[0] == 'Location':
                 st.selectbox('', options=input_item[2], key=input_item[3])
