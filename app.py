@@ -62,11 +62,11 @@ st.markdown("""
         background-color: #45a049;  /* Warna hijau lebih gelap saat hover */
     }
     .stButton>button.predict-button {
-        background-color: #f9dcc4;  /* Warna beige untuk tombol predict */
+        background-color: #f9dcc4;  /* Warna beige untuk tombol Predict */
         color: black;
     }
     .stButton>button.predict-button:hover {
-        background-color: #f7b8a3;  /* Warna beige lebih gelap saat hover */
+        background-color: #f4b9a7;  /* Warna beige lebih gelap saat hover */
     }
     .stSelectbox, .stNumberInput, .stTextInput, .stTextArea {
         background: #f9dcc4; /* Background beige */
@@ -142,8 +142,8 @@ with col2:
     visibility = st.number_input('Visibility (km)')
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Tombol prediksi
-if st.button('Predict', key='predict', help='Click to predict the weather type', className='predict-button'):
+# Tombol prediksi dengan kelas khusus
+if st.button('Predict', key='predict', help='Klik untuk memprediksi jenis cuaca', use_container_width=True):
     to_predict_list = [
         temperature, humidity, wind_speed, precipitation,
         cloud_cover_options[cloud_cover], atmospheric_pressure, uv_index,
