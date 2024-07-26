@@ -28,142 +28,137 @@ def value_predictor(to_predict_list):
     except Exception as e:
         raise RuntimeError(f"Failed to predict weather: {e}")
 
-# Menambahkan CSS untuk background dan styling
+# Menambahkan CSS untuk background, styling, dan ikon
 st.markdown("""
     <style>
-    body {
-        font-family: 'Arial', sans-serif;
-        color: #333;
-    }
+    @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+    
     .main {
-        background: linear-gradient(135deg, #a2c2e1, #f0f4f7);
+        background-image: url('https://wallpapercave.com/wp/wp12086198.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        min-height: 100vh;
-        padding: 20px;
+        color: white;
+        height: 100vh; /* Memastikan tinggi sesuai dengan viewport */
+        overflow: auto;
+        margin: 0; /* Menghilangkan margin untuk tampilan penuh */
     }
     .stButton>button {
-        background-color: #1e90ff;  /* Warna biru cerah untuk tombol */
-        color: white;
+        background-color: #f9dcc4;  /* Warna beige untuk tombol */
+        color: black;
         border: none;
-        padding: 12px 24px;
+        padding: 15px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
         font-size: 18px;
-        margin: 8px 4px;
+        margin: 10px 0;
         cursor: pointer;
-        border-radius: 20px;
-        transition: background-color 0.3s ease, transform 0.3s ease;
-        width: 100%;
-        box-sizing: border-box;
+        border-radius: 12px;
+        width: 100%; /* Lebar penuh tombol */
     }
     .stButton>button:hover {
-        background-color: #1c86ee;  /* Warna biru lebih gelap saat hover */
-        transform: scale(1.05);
+        background-color: #f4b9a7;  /* Warna beige lebih gelap saat hover */
     }
     .stSelectbox, .stNumberInput, .stTextInput, .stTextArea {
-        background: #ffffff; /* Background putih untuk input */
-        color: #333;
-        border-radius: 15px;
-        border: 2px solid #cccccc; /* Border abu-abu terang */
-        padding: 12px;
-        margin: 12px 0;
+        background: #f9dcc4; /* Background beige */
+        color: black;
+        border-radius: 10px;
+        border: 2px solid #f4b9a7; /* Border beige lebih gelap */
+        padding: 10px;
+        margin: 10px 0;
         box-sizing: border-box;
-        transition: border-color 0.3s ease;
+        width: 100%; /* Lebar penuh input */
     }
-    .stSelectbox>div, .stNumberInput>div, .stTextInput>div, .stTextArea>div {
-        background: #ffffff;
-        color: #333;
+    .input-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        background: #f9dcc4;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #f4b9a7;
+        width: 100%; /* Lebar penuh input container */
     }
-    .stSelectbox:hover, .stNumberInput:hover, .stTextInput:hover, .stTextArea:hover {
-        border-color: #1e90ff; /* Border biru cerah saat hover */
+    .input-container i {
+        font-size: 20px;
+        color: black; /* Warna ikon */
+        margin-right: 10px;
+    }
+    .input-label {
+        font-weight: bold;
+        color: black; /* Warna label */
+        margin-right: 10px;
+    }
+    .stNumberInput input, .stSelectbox select, .stTextInput input, .stTextArea textarea {
+        background: #f9dcc4;
+        color: black;
+        border: none;
+        width: 100%; /* Lebar penuh input di dalam container */
+    }
+    .st-container {
+        width: 100%; /* Lebar penuh untuk konten */
+        max-width: 100%; /* Menghindari pembatasan lebar */
     }
     .stColumns {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
-        justify-content: space-between;
     }
     .stColumn {
         flex: 1;
-        max-width: calc(50% - 20px);
-    }
-    .stTitle {
-        font-size: 28px;
-        font-weight: bold;
-        color: #1e90ff;
-        text-align: center;
-    }
-    .stWrite {
-        font-size: 16px;
-        color: #555;
-        text-align: center;
-    }
-    .input-label {
-        font-size: 16px;
-        color: #1e90ff;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .input-label i {
-        color: #1e90ff;
-        font-size: 20px;
+        min-width: 0;
+        max-width: 100%;
     }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 """, unsafe_allow_html=True)
 
 # Mengatur elemen utama di dalam div dengan kelas 'main'
 st.markdown('<div class="main">', unsafe_allow_html=True)
 
 # Antarmuka pengguna Streamlit
-st.markdown('<p class="stTitle">Weather Prediction</p>', unsafe_allow_html=True)
-st.markdown('<p class="stWrite">Masukkan data cuaca untuk memprediksi jenis cuaca.</p>', unsafe_allow_html=True)
+st.title("Weather Prediction")
+st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
-# Membagi input form menjadi dua kolom dengan 5 input di masing-masing kolom
-st.markdown('<div class="stColumns">', unsafe_allow_html=True)
+# Membagi input form menjadi dua baris dengan 5 input di setiap baris
+def create_input_row(inputs):
+    cols = st.columns(len(inputs))
+    for i, input_item in enumerate(inputs):
+        with cols[i]:
+            st.markdown(f'<div class="input-container"><i class="fas {input_item[1]}"></i><span class="input-label">{input_item[0]}</span>', unsafe_allow_html=True)
+            if input_item[0] == 'Cloud Cover' or input_item[0] == 'Season' or input_item[0] == 'Location':
+                st.selectbox('', options=input_item[2], key=input_item[3])
+            else:
+                st.number_input('', key=input_item[3])
+            st.markdown('</div>', unsafe_allow_html=True)
 
-with st.container():
-    col1, col2 = st.columns(2)
-    
-    with col1:
-        st.markdown('<div class="input-label"><i class="fas fa-thermometer-half"></i> Temperature (°C)</div>', unsafe_allow_html=True)
-        temperature = st.number_input('')
-        st.markdown('<div class="input-label"><i class="fas fa-tint"></i> Humidity (%)</div>', unsafe_allow_html=True)
-        humidity = st.number_input('')
-        st.markdown('<div class="input-label"><i class="fas fa-wind"></i> Wind Speed (km/h)</div>', unsafe_allow_html=True)
-        wind_speed = st.number_input('')
-        st.markdown('<div class="input-label"><i class="fas fa-cloud-showers-heavy"></i> Precipitation (%)</div>', unsafe_allow_html=True)
-        precipitation = st.number_input('')
-        st.markdown('<div class="input-label"><i class="fas fa-sun"></i> Atmospheric Pressure (hPa)</div>', unsafe_allow_html=True)
-        atmospheric_pressure = st.number_input('')
-    
-    with col2:
-        st.markdown('<div class="input-label"><i class="fas fa-cloud"></i> Cloud Cover</div>', unsafe_allow_html=True)
-        cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
-        cloud_cover = st.selectbox('', options=list(cloud_cover_options.keys()))
-        st.markdown('<div class="input-label"><i class="fas fa-calendar"></i> Season</div>', unsafe_allow_html=True)
-        season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
-        season = st.selectbox('', options=list(season_options.keys()))
-        st.markdown('<div class="input-label"><i class="fas fa-map-marker-alt"></i> Location</div>', unsafe_allow_html=True)
-        location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
-        location = st.selectbox('', options=list(location_options.keys()))
-        st.markdown('<div class="input-label"><i class="fas fa-sun"></i> UV Index</div>', unsafe_allow_html=True)
-        uv_index = st.number_input('')
-        st.markdown('<div class="input-label"><i class="fas fa-eye"></i> Visibility (km)</div>', unsafe_allow_html=True)
-        visibility = st.number_input('')
+# Definisi input untuk baris pertama dan kedua
+inputs_row1 = [
+    ('Temperature (°C)', 'fa-thermometer-half', None, 'temp'),
+    ('Humidity (%)', 'fa-tint', None, 'humidity'),
+    ('Wind Speed (km/h)', 'fa-wind', None, 'wind_speed'),
+    ('Precipitation (%)', 'fa-cloud-showers-heavy', None, 'precipitation'),
+    ('Atmospheric Pressure (hPa)', 'fa-gauge', None, 'pressure')
+]
+inputs_row2 = [
+    ('Cloud Cover', 'fa-cloud', {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}, 'cloud_cover'),
+    ('Season', 'fa-calendar-season', {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}, 'season'),
+    ('Location', 'fa-map-marker-alt', {'Coastal': 0, 'Inland': 1, 'Mountain': 2}, 'location'),
+    ('UV Index', 'fa-sun', None, 'uv_index'),
+    ('Visibility (km)', 'fa-eye', None, 'visibility')
+]
 
-st.markdown('</div>', unsafe_allow_html=True)
+# Menampilkan input dalam baris
+create_input_row(inputs_row1)
+create_input_row(inputs_row2)
 
 # Tombol prediksi
 if st.button('Predict'):
     to_predict_list = [
-        temperature, humidity, wind_speed, precipitation,
-        cloud_cover_options[cloud_cover], atmospheric_pressure, uv_index,
-        season_options[season], visibility, location_options[location]
+        st.session_state.temp, st.session_state.humidity, st.session_state.wind_speed,
+        st.session_state.precipitation, st.session_state.pressure, st.session_state.uv_index,
+        st.session_state.cloud_cover, st.session_state.season, st.session_state.visibility,
+        st.session_state.location
     ]
     
     try:
