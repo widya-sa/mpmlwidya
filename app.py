@@ -41,6 +41,8 @@ st.markdown("""
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        padding: 20px;
+        color: #333;
     }
     .stButton>button {
         background-color: #f9dcc4;  /* Warna beige untuk tombol */
@@ -118,6 +120,11 @@ st.markdown("""
         font-size: 16px;
         color: #333;
         margin-bottom: 20px;
+    }
+    /* CSS untuk menyembunyikan tombol + dan - pada input number */
+    .stNumberInput .stNumberInput__increment, 
+    .stNumberInput .stNumberInput__decrement {
+        display: none;
     }
     </style>
 """, unsafe_allow_html=True)
