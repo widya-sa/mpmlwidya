@@ -108,11 +108,12 @@ st.markdown("""
         display: flex;
         align-items: center;
         margin-bottom: 10px;
+        font-weight: bold; /* Menebalkan nama kolom input */
     }
     .input-label i {
         margin-right: 10px;
         font-size: 20px;
-        color: #f4b9a7;
+        color: black; /* Mengubah warna ikon menjadi hitam */
     }
     </style>
 """, unsafe_allow_html=True)
