@@ -115,6 +115,12 @@ st.markdown("""
         font-size: 20px;
         color: black; /* Mengubah warna ikon menjadi hitam */
     }
+    .description {
+        text-align: justify; /* Rata kanan kiri atau justify */
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 20px;
+    }
     </style>
 """, unsafe_allow_html=True)
 
@@ -122,12 +128,10 @@ st.markdown("""
 st.markdown('<div class="main">', unsafe_allow_html=True)
 
 # Antarmuka pengguna Streamlit
-st.title("CloudGaze (Weather Prediction)")
+st.title("CloudGaze (Weather Prediction) by Widya S.A.")
 st.markdown("""
-    <div style="font-size: 16px; line-height: 1.6; text-align: center;">
-        Welcome to CloudGaze!<br>
-        Discover a new way to keep an eye on the sky with CloudGaze, your go-to app for all things weather. Whether you're dreaming of a sunny getaway or preparing for a rainy day, CloudGaze provides crystal-clear forecasts that are as reliable as they are engaging. Stay ahead of the storm, enjoy sunny spells, and gaze at the clouds with confidence—CloudGaze is here to make every forecast an easy breeze.<br><br>
-        Proudly created by Widya S.A, CloudGaze is crafted with care and expertise to bring you the best in weather prediction technology.
+    <div class="description">
+        Welcome to CloudGaze! Discover a new way to keep an eye on the sky with CloudGaze, your go-to app for all things weather. Whether you're dreaming of a sunny getaway or preparing for a rainy day, CloudGaze provides crystal-clear forecasts that are as reliable as they are engaging. Stay ahead of the storm, enjoy sunny spells, and gaze at the clouds with confidence—CloudGaze is here to make every forecast an easy breeze.
     </div>
 """, unsafe_allow_html=True)
 
