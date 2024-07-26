@@ -1,6 +1,7 @@
 import streamlit as st
 import joblib
 import numpy as np
+import sklearn.metrics
 
 # Fungsi untuk memuat model dan melakukan prediksi
 def value_predictor(to_predict_list):
