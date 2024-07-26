@@ -39,7 +39,7 @@ st.markdown("""
     }
     .stButton>button {
         background-color: #f9dcc4;  /* Warna beige untuk tombol */
-        color: black;
+        color: black;               /* Warna teks hitam */
         border: none;
         padding: 10px 20px;
         text-align: center;
