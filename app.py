@@ -32,7 +32,7 @@ def value_predictor(to_predict_list):
 st.markdown("""
     <style>
     .main {
-        background-image: url('https://wallpapercave.com/wp/wp12086198.jpg');
+        background-image: url('https://i.pinimg.com/736x/c2/47/b3/c247b3049ed035a022785257f87b1eb2.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
@@ -41,42 +41,56 @@ st.markdown("""
         overflow: auto;
         position: relative;
         padding: 20px; /* Menambahkan padding untuk ruang di sekeliling konten */
+        box-sizing: border-box;
     }
-    .sidebar .sidebar-content {
-        background-color: rgba(255, 255, 255, 0.8);
+    .content {
+        position: relative;
+        z-index: 10; /* Memastikan konten berada di atas latar belakang */
+        background-color: rgba(0, 0, 0, 0.6); /* Memberi latar belakang semi-transparan agar teks lebih terbaca */
+        padding: 30px;
+        border-radius: 15px;
     }
     .stButton>button {
-        background-color: #4CAF50;  /* Warna hijau untuk tombol */
+        background-color: #4CAF50; /* Warna hijau untuk tombol */
         color: white;
         border: none;
-        padding: 10px 20px;
+        padding: 15px 30px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
+        font-size: 18px;
+        margin: 10px 0;
         cursor: pointer;
         border-radius: 12px;
         z-index: 10; /* Memastikan tombol berada di atas latar belakang */
     }
     .stButton>button:hover {
-        background-color: #45a049;  /* Warna hijau lebih gelap saat hover */
+        background-color: #45a049; /* Warna hijau lebih gelap saat hover */
     }
     .stSelectbox, .stNumberInput {
         background: rgba(255, 255, 255, 0.9); /* Background lebih terang agar kontras */
         color: black;
         border-radius: 10px;
+        border: 2px solid #4CAF50; /* Menambahkan border dengan warna hijau */
+        padding: 10px;
+        margin: 10px 0;
     }
     .stTextInput, .stTextArea {
         background: rgba(255, 255, 255, 0.9); /* Background lebih terang agar kontras */
         color: black;
         border-radius: 10px;
+        border: 2px solid #4CAF50; /* Menambahkan border dengan warna hijau */
+        padding: 10px;
+        margin: 10px 0;
     }
     </style>
 """, unsafe_allow_html=True)
 
 # Mengatur elemen utama di dalam div dengan kelas 'main'
 st.markdown('<div class="main">', unsafe_allow_html=True)
+
+# Konten dalam div dengan kelas 'content'
+st.markdown('<div class="content">', unsafe_allow_html=True)
 
 # Antarmuka pengguna Streamlit
 st.title("Weather Prediction")
@@ -115,6 +129,9 @@ if st.button('Predict'):
         st.success(f"Predicted Weather Type: {result}")
     except RuntimeError as e:
         st.error(f"An error occurred: {str(e)}")
+
+# Menutup div dengan kelas 'content'
+st.markdown('</div>', unsafe_allow_html=True)
 
 # Menutup div dengan kelas 'main'
 st.markdown('</div>', unsafe_allow_html=True)
