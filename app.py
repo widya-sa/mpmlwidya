@@ -36,9 +36,6 @@ st.markdown("""
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
-        padding: 20px;
-        color: white;
-        min-height: 100vh;
     }
     .stButton>button {
         background-color: #f9dcc4;  /* Warna beige untuk tombol */
