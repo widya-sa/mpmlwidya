@@ -38,6 +38,10 @@ st.markdown("""
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        color: white;
+        height: 100vh; /* Memastikan tinggi sesuai dengan viewport */
+        overflow: auto;
+        margin: 0; /* Menghilangkan margin untuk tampilan penuh */
     }
     .stButton>button {
         background-color: #f9dcc4;  /* Warna beige untuk tombol */
@@ -119,14 +123,26 @@ st.markdown('<div class="main">', unsafe_allow_html=True)
 st.title("Weather Prediction")
 st.markdown('<p class="black-text">Masukkan data cuaca untuk memprediksi jenis cuaca.</p>', unsafe_allow_html=True)
 
+# Mendefinisikan mapping untuk nilai kategorikal
+cloud_cover_mapping = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
+season_mapping = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
+location_mapping = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
+
 # Membagi input form menjadi dua kolom per baris
 def create_input_row(inputs):
     cols = st.columns(len(inputs))
     for i, input_item in enumerate(inputs):
         with cols[i]:
             st.markdown(f'<div class="input-container"><i class="fas {input_item[1]}"></i><span class="input-label">{input_item[0]}</span>', unsafe_allow_html=True)
-            if input_item[0] == 'Cloud Cover' or input_item[0] == 'Season' or input_item[0] == 'Location':
-                st.selectbox('', options=input_item[2], key=input_item[3])
+            if input_item[0] == 'Cloud Cover':
+                value = st.selectbox('', options=list(cloud_cover_mapping.keys()), key=input_item[3])
+                st.session_state[input_item[3]] = cloud_cover_mapping[value]
+            elif input_item[0] == 'Season':
+                value = st.selectbox('', options=list(season_mapping.keys()), key=input_item[3])
+                st.session_state[input_item[3]] = season_mapping[value]
+            elif input_item[0] == 'Location':
+                value = st.selectbox('', options=list(location_mapping.keys()), key=input_item[3])
+                st.session_state[input_item[3]] = location_mapping[value]
             else:
                 st.number_input('', key=input_item[3])
             st.markdown('</div>', unsafe_allow_html=True)
@@ -142,11 +158,11 @@ inputs_row2 = [
 ]
 inputs_row3 = [
     ('Atmospheric Pressure (hPa)', 'fa-gauge', None, 'pressure'),
-    ('Cloud Cover', 'fa-cloud', {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}, 'cloud_cover')
+    ('Cloud Cover', 'fa-cloud', list(cloud_cover_mapping.keys()), 'cloud_cover')
 ]
 inputs_row4 = [
-    ('Season', 'fa-calendar-season', {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}, 'season'),
-    ('Location', 'fa-map-marker-alt', {'Coastal': 0, 'Inland': 1, 'Mountain': 2}, 'location')
+    ('Season', 'fa-calendar-season', list(season_mapping.keys()), 'season'),
+    ('Location', 'fa-map-marker-alt', list(location_mapping.keys()), 'location')
 ]
 inputs_row5 = [
     ('UV Index', 'fa-sun', None, 'uv_index'),
