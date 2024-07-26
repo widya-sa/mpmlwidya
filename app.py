@@ -39,6 +39,10 @@ st.markdown("""
         background-repeat: no-repeat;
         background-attachment: fixed;
         color: white;
+        height: 100vh; /* Memastikan tinggi sesuai dengan viewport */
+        overflow: auto;
+        position: relative;
+        padding: 20px; /* Menambahkan padding untuk ruang di sekeliling konten */
     }
     .sidebar .sidebar-content {
         background-color: rgba(255, 255, 255, 0.8);
@@ -68,27 +72,32 @@ st.markdown("""
         padding: 10px;
         margin: 10px 0;
         box-sizing: border-box;
+        position: relative;
     }
     .stSelectbox>div, .stNumberInput>div, .stTextInput>div, .stTextArea>div {
         background: #f9dcc4;
         color: black;
     }
     .input-container {
-        display: flex;
-        align-items: center;
+        position: relative;
         margin-bottom: 10px;
     }
     .input-container i {
+        position: absolute;
+        left: 10px;
+        top: 50%;
+        transform: translateY(-50%);
         font-size: 20px;
-        margin-right: 10px;
-        color: #f4b9a7; /* Warna ikon */
+        color: black; /* Warna ikon */
+        z-index: 10;
     }
     .input-container input, .input-container select {
+        padding-left: 40px; /* Menambahkan ruang untuk ikon */
         flex: 1;
         border: 2px solid #f4b9a7;
         border-radius: 10px;
-        padding: 10px;
         background: #f9dcc4;
+        color: black;
     }
     </style>
 """, unsafe_allow_html=True)
