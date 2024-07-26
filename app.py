@@ -31,52 +31,73 @@ def value_predictor(to_predict_list):
 # Menambahkan CSS untuk background dan styling
 st.markdown("""
     <style>
+    body {
+        font-family: 'Arial', sans-serif;
+        color: #333;
+    }
     .main {
-        background-image: url('https://wallpapercave.com/wp/wp12086198.jpg');
+        background: linear-gradient(135deg, #a2c2e1, #f0f4f7);
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
+        min-height: 100vh;
+        padding: 20px;
     }
     .stButton>button {
-        background-color: #f9dcc4;  /* Warna beige untuk tombol */
-        color: black;
+        background-color: #1e90ff;  /* Warna biru cerah untuk tombol */
+        color: white;
         border: none;
-        padding: 10px 20px;
+        padding: 12px 24px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
+        font-size: 18px;
+        margin: 8px 4px;
         cursor: pointer;
-        border-radius: 12px;
-        z-index: 10; /* Memastikan tombol berada di atas latar belakang */
-        width: 100%; /* Membuat tombol penuh lebar kolom */
+        border-radius: 20px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        width: 100%;
         box-sizing: border-box;
     }
     .stButton>button:hover {
-        background-color: #f4b9a7;  /* Warna beige lebih gelap saat hover */
+        background-color: #1c86ee;  /* Warna biru lebih gelap saat hover */
+        transform: scale(1.05);
     }
     .stSelectbox, .stNumberInput, .stTextInput, .stTextArea {
-        background: #f9dcc4; /* Background beige */
-        color: black;
-        border-radius: 10px;
-        border: 2px solid #f4b9a7; /* Border beige lebih gelap */
-        padding: 10px;
-        margin: 10px 0;
+        background: #ffffff; /* Background putih untuk input */
+        color: #333;
+        border-radius: 15px;
+        border: 2px solid #cccccc; /* Border abu-abu terang */
+        padding: 12px;
+        margin: 12px 0;
         box-sizing: border-box;
+        transition: border-color 0.3s ease;
     }
     .stSelectbox>div, .stNumberInput>div, .stTextInput>div, .stTextArea>div {
-        background: #f9dcc4;
-        color: black;
+        background: #ffffff;
+        color: #333;
+    }
+    .stSelectbox:hover, .stNumberInput:hover, .stTextInput:hover, .stTextArea:hover {
+        border-color: #1e90ff; /* Border biru cerah saat hover */
     }
     .stColumns {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
+        justify-content: space-between;
     }
     .stColumn {
         flex: 1;
-        max-width: calc(50% - 10px);
+        max-width: calc(50% - 20px);
+    }
+    .stTitle {
+        font-size: 28px;
+        font-weight: bold;
+        color: #1e90ff;
+    }
+    .stWrite {
+        font-size: 16px;
+        color: #555;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -85,8 +106,8 @@ st.markdown("""
 st.markdown('<div class="main">', unsafe_allow_html=True)
 
 # Antarmuka pengguna Streamlit
-st.title("Weather Prediction")
-st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
+st.markdown('<p class="stTitle">Weather Prediction</p>', unsafe_allow_html=True)
+st.markdown('<p class="stWrite">Masukkan data cuaca untuk memprediksi jenis cuaca.</p>', unsafe_allow_html=True)
 
 # Membagi input form menjadi dua kolom dengan 5 input di masing-masing kolom
 st.markdown('<div class="stColumns">', unsafe_allow_html=True)
