@@ -44,21 +44,22 @@ st.markdown("""
         padding: 20px; /* Menambahkan padding agar konten tidak menempel pada tepi */
     }
     .stButton>button {
-        background-color: #f9dcc4;  /* Warna beige untuk tombol */
-        color: black;
+        background-color: #4CAF50;  /* Warna hijau untuk tombol */
+        color: white;
         border: none;
-        padding: 15px;
+        padding: 10px 20px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
-        font-size: 18px;
-        margin: 10px 0;
+        font-size: 16px;
+        margin: 4px 2px;
         cursor: pointer;
         border-radius: 12px;
+        z-index: 10; /* Memastikan tombol berada di atas latar belakang */
         width: 100%; /* Lebar penuh tombol */
     }
     .stButton>button:hover {
-        background-color: #f4b9a7;  /* Warna beige lebih gelap saat hover */
+        background-color: #45a049;  /* Warna hijau lebih gelap saat hover */
     }
     .stSelectbox, .stNumberInput, .stTextInput, .stTextArea {
         background: #f9dcc4; /* Background beige */
@@ -90,15 +91,9 @@ st.markdown("""
         color: black; /* Warna label */
         margin-right: 10px;
     }
-    .stNumberInput input, .stSelectbox select, .stTextInput input, .stTextArea textarea {
-        background: #f9dcc4;
-        color: black;
-        border: none;
-        width: 100%; /* Lebar penuh input di dalam container */
-    }
     .input-row {
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
         gap: 20px;
         margin-bottom: 20px;
     }
@@ -116,47 +111,36 @@ st.markdown('<div class="main">', unsafe_allow_html=True)
 st.title("Weather Prediction")
 st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
-# Fungsi untuk menampilkan input dengan ikon
-def create_input_row(inputs):
+# Membagi input form menjadi dua kolom dengan 5 input di masing-masing kolom
+col1, col2 = st.columns(2)
+
+with col1:
     st.markdown('<div class="input-row">', unsafe_allow_html=True)
-    for input_item in inputs:
-        st.markdown(f'<div class="input-col"><div class="input-container"><i class="fas {input_item[1]}"></i><span class="input-label">{input_item[0]}</span>', unsafe_allow_html=True)
-        if input_item[0] == 'Cloud Cover' or input_item[0] == 'Season' or input_item[0] == 'Location':
-            st.selectbox('', options=input_item[2], key=input_item[3])
-        else:
-            st.number_input('', key=input_item[3])
-        st.markdown('</div></div>', unsafe_allow_html=True)
+    temperature = st.number_input('Temperature (°C)')
+    humidity = st.number_input('Humidity (%)')
+    wind_speed = st.number_input('Wind Speed (km/h)')
+    precipitation = st.number_input('Precipitation (%)')
+    atmospheric_pressure = st.number_input('Atmospheric Pressure (hPa)')
     st.markdown('</div>', unsafe_allow_html=True)
 
-# Definisi input untuk baris pertama dan kedua
-inputs_row1 = [
-    ('Temperature (°C)', 'fa-thermometer-half', None, 'temp'),
-    ('Humidity (%)', 'fa-tint', None, 'humidity'),
-    ('Wind Speed (km/h)', 'fa-wind', None, 'wind_speed'),
-    ('Precipitation (%)', 'fa-cloud-showers-heavy', None, 'precipitation'),
-    ('Atmospheric Pressure (hPa)', 'fa-gauge', None, 'pressure')
-]
-inputs_row2 = [
-    ('Cloud Cover', 'fa-cloud', {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}, 'cloud_cover'),
-    ('Season', 'fa-calendar-season', {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}, 'season'),
-    ('Location', 'fa-map-marker-alt', {'Coastal': 0, 'Inland': 1, 'Mountain': 2}, 'location'),
-    ('UV Index', 'fa-sun', None, 'uv_index'),
-    ('Visibility (km)', 'fa-eye', None, 'visibility')
-]
-
-# Menampilkan input dalam baris
-create_input_row(inputs_row1[:2])
-create_input_row(inputs_row1[2:])
-create_input_row(inputs_row2[:2])
-create_input_row(inputs_row2[2:])
+with col2:
+    st.markdown('<div class="input-row">', unsafe_allow_html=True)
+    cloud_cover_options = {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}
+    cloud_cover = st.selectbox('Cloud Cover', options=list(cloud_cover_options.keys()))
+    season_options = {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}
+    season = st.selectbox('Season', options=list(season_options.keys()))
+    location_options = {'Coastal': 0, 'Inland': 1, 'Mountain': 2}
+    location = st.selectbox('Location', options=list(location_options.keys()))
+    uv_index = st.number_input('UV Index')
+    visibility = st.number_input('Visibility (km)')
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # Tombol prediksi
 if st.button('Predict'):
     to_predict_list = [
-        st.session_state.temp, st.session_state.humidity, st.session_state.wind_speed,
-        st.session_state.precipitation, st.session_state.pressure, st.session_state.uv_index,
-        st.session_state.cloud_cover, st.session_state.season, st.session_state.visibility,
-        st.session_state.location
+        temperature, humidity, wind_speed, precipitation,
+        cloud_cover_options[cloud_cover], atmospheric_pressure, uv_index,
+        season_options[season], visibility, location_options[location]
     ]
     
     try:
