@@ -19,10 +19,10 @@ def value_predictor(to_predict_list):
 st.title("Weather Prediction")
 
 # Input form
-temperature = st.number_input('Temperature', format="%f")
-humidity = st.number_input('Humidity', format="%f")
-wind_speed = st.number_input('Wind Speed', format="%f")
-precipitation = st.number_input('Precipitation (%)', format="%f")
+temperature = st.number_input('Temperature')
+humidity = st.number_input('Humidity')
+wind_speed = st.number_input('Wind Speed')
+precipitation = st.number_input('Precipitation (%)')
 
 # Dropdown untuk Cloud Cover
 cloud_cover = st.selectbox('Cloud Cover', options={
@@ -48,9 +48,9 @@ location = st.selectbox('Location', options={
 })
 
 # Inputan lainnya
-atmospheric_pressure = st.number_input('Atmospheric Pressure', format="%f")
-uv_index = st.number_input('UV Index', format="%f")
-visibility = st.number_input('Visibility (km)', format="%f")
+atmospheric_pressure = st.number_input('Atmospheric Pressure')
+uv_index = st.number_input('UV Index')
+visibility = st.number_input('Visibility (km)')
 
 # Tombol prediksi
 if st.button('Predict'):
