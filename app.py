@@ -96,8 +96,8 @@ visibility = st.number_input('Visibility (km)')
 if st.button('Predict'):
     to_predict_list = [
         temperature, humidity, wind_speed, precipitation,
-        cloud_cover, atmospheric_pressure, uv_index, season,
-        visibility, location
+        int(cloud_cover), atmospheric_pressure, uv_index, int(season),
+        visibility, int(location)
     ]
     
     try:
