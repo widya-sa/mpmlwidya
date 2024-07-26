@@ -120,7 +120,7 @@ st.markdown('<div class="main">', unsafe_allow_html=True)
 st.title("Weather Prediction")
 st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
-# Membagi input form menjadi dua baris dengan 5 input di setiap baris
+# Membagi input form menjadi dua kolom per baris
 def create_input_row(inputs):
     cols = st.columns(len(inputs))
     for i, input_item in enumerate(inputs):
@@ -135,15 +135,21 @@ def create_input_row(inputs):
 # Definisi input untuk baris pertama dan kedua
 inputs_row1 = [
     ('Temperature (°C)', 'fa-thermometer-half', None, 'temp'),
-    ('Humidity (%)', 'fa-tint', None, 'humidity'),
-    ('Wind Speed (km/h)', 'fa-wind', None, 'wind_speed'),
-    ('Precipitation (%)', 'fa-cloud-showers-heavy', None, 'precipitation'),
-    ('Atmospheric Pressure (hPa)', 'fa-gauge', None, 'pressure')
+    ('Humidity (%)', 'fa-tint', None, 'humidity')
 ]
 inputs_row2 = [
-    ('Cloud Cover', 'fa-cloud', {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}, 'cloud_cover'),
+    ('Wind Speed (km/h)', 'fa-wind', None, 'wind_speed'),
+    ('Precipitation (%)', 'fa-cloud-showers-heavy', None, 'precipitation')
+]
+inputs_row3 = [
+    ('Atmospheric Pressure (hPa)', 'fa-gauge', None, 'pressure'),
+    ('Cloud Cover', 'fa-cloud', {'Clear': 0, 'Cloudy': 1, 'Overcast': 2, 'Partly Cloudy': 3}, 'cloud_cover')
+]
+inputs_row4 = [
     ('Season', 'fa-calendar-season', {'Autumn': 0, 'Spring': 1, 'Summer': 2, 'Winter': 3}, 'season'),
-    ('Location', 'fa-map-marker-alt', {'Coastal': 0, 'Inland': 1, 'Mountain': 2}, 'location'),
+    ('Location', 'fa-map-marker-alt', {'Coastal': 0, 'Inland': 1, 'Mountain': 2}, 'location')
+]
+inputs_row5 = [
     ('UV Index', 'fa-sun', None, 'uv_index'),
     ('Visibility (km)', 'fa-eye', None, 'visibility')
 ]
@@ -151,6 +157,9 @@ inputs_row2 = [
 # Menampilkan input dalam baris
 create_input_row(inputs_row1)
 create_input_row(inputs_row2)
+create_input_row(inputs_row3)
+create_input_row(inputs_row4)
+create_input_row(inputs_row5)
 
 # Tombol prediksi
 if st.button('Predict'):
