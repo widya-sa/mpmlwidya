@@ -184,4 +184,9 @@ if st.button('Predict'):
     
     try:
         result = value_predictor(to_predict_list)
-        st.markdown(f'<div class="prediction-result">Predicted Weather Type: {result}</div>', unsafe_allow_html
+        st.markdown(f'<div class="prediction-result">Predicted Weather Type: {result}</div>', unsafe_allow_html=True)
+    except RuntimeError as e:
+        st.error(f"An error occurred: {str(e)}")
+
+# Menutup div dengan kelas 'main'
+st.markdown('</div>', unsafe_allow_html=True)
