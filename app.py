@@ -41,7 +41,7 @@ st.markdown("""
         color: white;
         height: 100vh; /* Memastikan tinggi sesuai dengan viewport */
         overflow: auto;
-        margin: 0; /* Menghilangkan margin untuk tampilan penuh */
+        padding: 20px; /* Menambahkan padding agar konten tidak menempel pada tepi */
     }
     .stButton>button {
         background-color: #f9dcc4;  /* Warna beige untuk tombol */
@@ -96,19 +96,15 @@ st.markdown("""
         border: none;
         width: 100%; /* Lebar penuh input di dalam container */
     }
-    .st-container {
-        width: 100%; /* Lebar penuh untuk konten */
-        max-width: 100%; /* Menghindari pembatasan lebar */
-    }
-    .stColumns {
+    .input-row {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
     }
-    .stColumn {
+    .input-col {
         flex: 1;
         min-width: 0;
-        max-width: 100%;
+        max-width: calc(100% / 5 - 20px); /* Lebar kolom 1/5 dari container */
     }
     </style>
 """, unsafe_allow_html=True)
@@ -122,15 +118,15 @@ st.write("Masukkan data cuaca untuk memprediksi jenis cuaca.")
 
 # Membagi input form menjadi dua baris dengan 5 input di setiap baris
 def create_input_row(inputs):
-    cols = st.columns(len(inputs))
-    for i, input_item in enumerate(inputs):
-        with cols[i]:
-            st.markdown(f'<div class="input-container"><i class="fas {input_item[1]}"></i><span class="input-label">{input_item[0]}</span>', unsafe_allow_html=True)
-            if input_item[0] == 'Cloud Cover' or input_item[0] == 'Season' or input_item[0] == 'Location':
-                st.selectbox('', options=input_item[2], key=input_item[3])
-            else:
-                st.number_input('', key=input_item[3])
-            st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('<div class="input-row">', unsafe_allow_html=True)
+    for input_item in inputs:
+        st.markdown(f'<div class="input-col"><div class="input-container"><i class="fas {input_item[1]}"></i><span class="input-label">{input_item[0]}</span>', unsafe_allow_html=True)
+        if input_item[0] == 'Cloud Cover' or input_item[0] == 'Season' or input_item[0] == 'Location':
+            st.selectbox('', options=input_item[2], key=input_item[3])
+        else:
+            st.number_input('', key=input_item[3])
+        st.markdown('</div></div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
 # Definisi input untuk baris pertama dan kedua
 inputs_row1 = [
